@@ -1,0 +1,51 @@
+
+/* Class = "UITextField"; placeholder = "What bill is it?"; ObjectID = "5BH-w8-Ky1"; */
+"5BH-w8-Ky1.placeholder" = "What bill is it?";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "76P-Nn-LSq"; */
+"76P-Nn-LSq.text" = "0.00";
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "Master";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "Cne-nw-18X"; */
+"Cne-nw-18X.text" = "0.00";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "DRc-Bk-20v"; */
+"DRc-Bk-20v.text" = "Date";
+
+/* Class = "UIViewController"; title = "Detail"; ObjectID = "JEX-9P-axG"; */
+"JEX-9P-axG.title" = "Detail";
+
+/* Class = "UILabel"; text = "0 Months"; ObjectID = "M5J-mo-BTd"; */
+"M5J-mo-BTd.text" = "0 Months";
+
+/* Class = "UINavigationController"; title = "Master"; ObjectID = "RMx-3f-FxP"; */
+"RMx-3f-FxP.title" = "Master";
+
+/* Class = "UINavigationItem"; title = "Your Bills"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "Your Bills";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "cAI-Go-7hz"; */
+"cAI-Go-7hz.normalTitle" = "Done";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "mOI-FS-AaM"; */
+"mOI-FS-AaM.title" = "Detail";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "mu2-ZH-Hvt"; */
+"mu2-ZH-Hvt.text" = "Title";
+
+/* Class = "UILabel"; text = "Date"; ObjectID = "n7d-Ag-ma2"; */
+"n7d-Ag-ma2.text" = "Date";
+
+/* Class = "UITextField"; placeholder = "Period"; ObjectID = "o63-PB-xCr"; */
+"o63-PB-xCr.placeholder" = "Period";
+
+/* Class = "UITextField"; placeholder = "How much?"; ObjectID = "rru-Mn-egJ"; */
+"rru-Mn-egJ.placeholder" = "How much?";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "uGP-xr-oNc"; */
+"uGP-xr-oNc.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "yVR-nw-VvS"; */
+"yVR-nw-VvS.normalTitle" = "Edit";
