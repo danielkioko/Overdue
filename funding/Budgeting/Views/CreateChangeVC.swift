@@ -17,6 +17,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var noteActualDate: UIDatePicker!
     @IBOutlet weak var notesText: UITextView!
     @IBOutlet weak var noteIcon: UIImageView!
+    @IBOutlet var notesLayer: UIView!
     
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var doneButtonLayer: UIView!
@@ -27,6 +28,8 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     var currentDate: String = ""
     var reminderDate: String = ""
     
+    var importedResult:String = ""
+    
     private(set) var changingReallySimpleNote : SimpleNote?
 
     var typeItems = ["Household", "Taxes", "Debits", "Other"]
@@ -36,7 +39,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         super.viewDidLoad()
         
         gradientLayer.frame = self.view.bounds
-        gradientLayer.colors = [UIColor.init(hexString: "1e3c72"), UIColor.init(hexString: "2a5298")]
+        //gradientLayer.colors = [UIColor.init(hexString: "1e3c72"), UIColor.init(hexString: "2a5298")]
         self.view.layer.addSublayer(gradientLayer)
         
         customize()
@@ -55,6 +58,10 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         let backButton = UIBarButtonItem()
         backButton.title = "Back"
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        if importedResult != "0" {
+            noteTextAmountView.text = importedResult
+        }
     
         selectType()
         

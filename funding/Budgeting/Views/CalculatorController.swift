@@ -17,16 +17,18 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet var eraseLayer: UIView!
     @IBOutlet var createLayer: UIView!
     
+    var result:String?
+    
     @IBAction func createBillWithResult(_ sender: Any) {
         
-        let result = String(displayNum.text!)
+        self.result = displayNum.text!
+        performSegue(withIdentifier: "addBillWithResult", sender: self)
         
-//        let calc = CalculatorController()
-//        let editBill = CreateChange()
-//        
-//        editBill.noteTextAmountView.text = result
-//        self.present(editBill, animated: true, completion: nil)
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var vc = segue.destination as! CreateChange
+        vc.importedResult = self.result!
     }
     
     var prevNum : Double = 0
