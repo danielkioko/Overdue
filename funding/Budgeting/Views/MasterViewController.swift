@@ -36,6 +36,7 @@ class MasterViewController: UITableViewController {
         self.navigationItem.title = ""
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.hidesBackButton = true
         
         // Core data initialization
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {

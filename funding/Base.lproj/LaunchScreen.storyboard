@@ -16,14 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="89M-iw-Va5">
-                                <rect key="frame" x="20" y="583" width="374" height="221"/>
+                                <rect key="frame" x="20" y="546" width="374" height="221"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="221" id="SVz-Au-kSc"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-V4-nSm">
-                                <rect key="frame" x="20" y="834" width="374" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-V4-nSm">
+                                <rect key="frame" x="20" y="785" width="374" height="55"/>
                                 <string key="text"> © Daniel Kioko 2020
 copyright sign
 Unicode: U+00A9, UTF-8: C2 A9</string>
@@ -32,22 +32,20 @@ Unicode: U+00A9, UTF-8: C2 A9</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xM3-W9-0FD">
-                                <rect key="frame" x="87" y="384" width="240" height="89"/>
+                                <rect key="frame" x="87" y="344" width="240" height="52"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overdue." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ay7-9G-THF">
-                                        <rect key="frame" x="8" y="8" width="224" height="73"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="73" id="ekb-nz-6lm"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overdue." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ay7-9G-THF">
+                                        <rect key="frame" x="8" y="9.5" width="224" height="34.5"/>
+                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Ay7-9G-THF" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="top" constant="9.5" id="6kb-9d-avT"/>
                                     <constraint firstItem="Ay7-9G-THF" firstAttribute="leading" secondItem="xM3-W9-0FD" secondAttribute="leading" constant="8" id="VeE-VW-j5i"/>
-                                    <constraint firstItem="Ay7-9G-THF" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="top" constant="8" id="ZcP-zr-P14"/>
+                                    <constraint firstAttribute="height" constant="52" id="a2a-kr-XYZ"/>
                                     <constraint firstAttribute="trailing" secondItem="Ay7-9G-THF" secondAttribute="trailing" constant="8" id="fyM-YV-UNA"/>
                                     <constraint firstAttribute="bottom" secondItem="Ay7-9G-THF" secondAttribute="bottom" constant="8" id="pAf-oW-vVF"/>
                                 </constraints>
@@ -56,12 +54,12 @@ Unicode: U+00A9, UTF-8: C2 A9</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xM3-W9-0FD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="DnS-2G-ZaM"/>
-                            <constraint firstItem="89M-iw-Va5" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="bottom" constant="110" id="Eqn-eT-PrK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="89M-iw-Va5" secondAttribute="trailing" constant="20" id="HAp-5c-jZS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xM3-W9-0FD" secondAttribute="trailing" constant="87" id="JM7-HD-1HU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ydb-V4-nSm" secondAttribute="bottom" id="Nkj-Xk-gHb"/>
-                            <constraint firstItem="xM3-W9-0FD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="340" id="QcY-zw-lDO"/>
-                            <constraint firstItem="Ydb-V4-nSm" firstAttribute="top" secondItem="89M-iw-Va5" secondAttribute="bottom" constant="30" id="epL-gP-mfs"/>
+                            <constraint firstItem="xM3-W9-0FD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="300" id="JtJ-IR-Cp3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ydb-V4-nSm" secondAttribute="bottom" constant="22" id="Nnl-LK-F7a"/>
+                            <constraint firstItem="89M-iw-Va5" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="bottom" constant="150" id="YIN-SG-3HP"/>
+                            <constraint firstItem="Ydb-V4-nSm" firstAttribute="top" secondItem="89M-iw-Va5" secondAttribute="bottom" constant="18" id="epL-gP-mfs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ydb-V4-nSm" secondAttribute="trailing" constant="20" id="iS4-UI-cnI"/>
                             <constraint firstItem="Ydb-V4-nSm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nh2-cx-GVU"/>
                             <constraint firstItem="89M-iw-Va5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vjM-E2-i4P"/>

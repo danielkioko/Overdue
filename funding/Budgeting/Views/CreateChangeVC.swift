@@ -39,7 +39,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         super.viewDidLoad()
         
         gradientLayer.frame = self.view.bounds
-        //gradientLayer.colors = [UIColor.init(hexString: "1e3c72"), UIColor.init(hexString: "2a5298")]
         self.view.layer.addSublayer(gradientLayer)
         
         customize()
@@ -49,7 +48,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         typePicker.delegate = self
         
         let changingReallySimpleNote = self.changingReallySimpleNote
-            // in change mode: initialize for fields with data coming from note to be changed
         noteTextAmountView.text = changingReallySimpleNote?.amount.currencyFormatting()
         noteTextTypeView.text = changingReallySimpleNote?.noteType
         noteTitleTextField.text = changingReallySimpleNote?.noteTitle
@@ -162,7 +160,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         
         NoteStorage.storage.addNote(noteToBeAdded: note)
         performSegue(withIdentifier: "backToMenu", sender: self)
-        
     }
 
     private func changeItem() -> Void {
