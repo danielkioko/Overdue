@@ -12,12 +12,6 @@ import UIKit
 extension MasterViewController {
     
     func customize() {
-        
-//        totalLayer.layer.cornerRadius = 4
-//        totalLayer.layer.shadowRadius = 4
-//        totalLayer.layer.opacity = 0.9
-//        totalLayer.layer.borderWidth = 0.0
-        
     }
     
     func calculateTotalForMonth() {
