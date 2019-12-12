@@ -7,8 +7,10 @@
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="noteTitle" optional="YES" attributeType="String"/>
         <attribute name="noteType" optional="YES" attributeType="String"/>
+        <attribute name="paid" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="reccurring" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Note" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Note" positionX="-63" positionY="-18" width="128" height="163"/>
     </elements>
 </model>

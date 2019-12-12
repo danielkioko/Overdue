@@ -11,9 +11,6 @@ import UIKit
 
 extension MasterViewController {
     
-    func customize() {
-    }
-    
     func calculateTotalForMonth() {
         
         var amounts: [Int] = []

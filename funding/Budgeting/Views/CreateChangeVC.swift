@@ -15,6 +15,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var noteTextAmountView: UITextField!
     @IBOutlet weak var noteTextTypeView: UITextField!
     @IBOutlet weak var noteActualDate: UIDatePicker!
+    @IBOutlet weak var noteRecurringSwitch: UISwitch!
     @IBOutlet weak var notesText: UITextView!
     @IBOutlet weak var noteIcon: UIImageView!
     @IBOutlet var notesLayer: UIView!
@@ -27,6 +28,8 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     
     var currentDate: String = ""
     var reminderDate: String = ""
+    var isRecurring: Bool = false
+    var isPaid: Bool = false
     
     var importedResult:String = ""
     
@@ -42,35 +45,14 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         self.view.layer.addSublayer(gradientLayer)
         
         customize()
-        noteActualDate.minimumDate = Date()
-        
-        noteTextAmountView.delegate = self as? UITextFieldDelegate
-        typePicker.delegate = self
-        
-        let changingReallySimpleNote = self.changingReallySimpleNote
-        noteTextAmountView.text = changingReallySimpleNote?.amount.currencyFormatting()
-        noteTextTypeView.text = changingReallySimpleNote?.noteType
-        noteTitleTextField.text = changingReallySimpleNote?.noteTitle
-
-        // For back button in navigation bar, change text
-        let backButton = UIBarButtonItem()
-        backButton.title = "Back"
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
-        if importedResult != "0" {
-            noteTextAmountView.text = importedResult
-        }
-    
         selectType()
-        
-        if (noteTextTypeView.text == "") {
-            noteIcon.image = UIImage(named: typeItems[0])
-            noteTextTypeView.text = String(typeItems[0])
-        } else {
-            noteIcon.image = UIImage(named: noteTextTypeView.text!)
-        }
-        
         enableCloseKeyboard()
+        
+        if noteRecurringSwitch.isOn {
+            isRecurring = true
+        } else {
+            isRecurring = false
+        }
         
     }
     
@@ -133,6 +115,23 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         
+        let markAsPaidAction = UNNotificationAction(
+            identifier: "paid",
+            title: "Paid",
+            options: [])
+        
+        let ignoreAction = UNNotificationAction(
+        identifier: "ignore",
+        title: "Ignore",
+        options: [])
+        
+        let alarmCategory = UNNotificationCategory(
+            identifier: "alarm",
+            actions: [markAsPaidAction, ignoreAction],
+            intentIdentifiers: [],
+            options: [])
+        center.setNotificationCategories([alarmCategory])
+        
         content.title = noteTitleTextField.text!
         content.body = noteTextAmountView.text! + " Due Soon"
         content.categoryIdentifier = "alarm"
@@ -140,13 +139,13 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         content.sound = UNNotificationSound.default
         
         var dateComponents = DateComponents()
-        dateComponents.hour = 09
-        dateComponents.minute = 00
+        dateComponents.hour = 18
+        dateComponents.minute = 53
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
-            
+    
     }
     
     private func addItem() -> Void {
@@ -156,7 +155,9 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             amount:     noteTextAmountView.text!,
             notes:      notesText.text!,
             noteType:   noteTextTypeView.text!,
-            actualDate: noteActualDate.date)
+            actualDate: noteActualDate.date,
+            recurring:  true,
+            paid:       true)
         
         NoteStorage.storage.addNote(noteToBeAdded: note)
         performSegue(withIdentifier: "backToMenu", sender: self)
@@ -174,7 +175,9 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     notes:          notesText.text!,
                     amount:         noteTextAmountView.text!,
                     noteType:       noteTextTypeView.text!,
-                    actualDate:     noteActualDate.date)
+                    actualDate:     noteActualDate.date,
+                    recurring:      true,
+                    paid:           true)
                 
             )
             // navigate back to list of notes
@@ -192,6 +195,87 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             // show alert
             self.present(alert, animated: true)
         }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let identifier = response.actionIdentifier
+        let request = response.notification.request
+        
+        if identifier == "paid" {
+            
+            if let changingReallySimpleNote = self.changingReallySimpleNote {
+                // change the note through note storage
+                NoteStorage.storage.changeNote(
+                    
+                    noteToBeChanged: SimpleNote(
+                        noteId:         changingReallySimpleNote.noteId,
+                        noteTitle:      noteTitleTextField.text!,
+                        notes:          notesText.text!,
+                        amount:         noteTextAmountView.text!,
+                        noteType:       noteTextTypeView.text!,
+                        actualDate:     noteActualDate.date,
+                        recurring:      true,
+                        paid:           true)
+                    
+                )
+                
+                //addNotification()
+                
+                let center = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
+                
+                let markAsPaidAction = UNNotificationAction(
+                    identifier: "paid",
+                    title: "Paid",
+                    options: [])
+                
+                let ignoreAction = UNNotificationAction(
+                identifier: "ignore",
+                title: "Ignore",
+                options: [])
+                
+                let alarmCategory = UNNotificationCategory(
+                    identifier: "alarm",
+                    actions: [markAsPaidAction, ignoreAction],
+                    intentIdentifiers: [],
+                    options: [])
+                center.setNotificationCategories([alarmCategory])
+                
+                content.title = noteTitleTextField.text!
+                content.body = noteTextAmountView.text! + " Due Soon"
+                content.categoryIdentifier = "alarm"
+                content.userInfo = ["customData": "fizzbuzz"]
+                content.sound = UNNotificationSound.default
+                
+                var dateComponents = DateComponents()
+                dateComponents.hour = 18
+                dateComponents.minute = 55
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                center.add(request)
+                
+            } else {
+                // create alert
+                let alert = UIAlertController(
+                    title: "Unexpected error",
+                    message: "Cannot change the note, unexpected error occurred. Try again later.",
+                    preferredStyle: .alert)
+                
+                // add OK action
+                alert.addAction(UIAlertAction(title: "OK", style: .default ) { (_) in self.performSegue(withIdentifier: "backToMenu",
+                                                  sender: self)})
+                // show alert
+                self.present(alert, animated: true)
+            }
+           completionHandler()
+        }
+        
     }
 
 }

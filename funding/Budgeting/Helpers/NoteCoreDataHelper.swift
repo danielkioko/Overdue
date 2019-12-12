@@ -50,11 +50,18 @@ class NoteCoreDataHelper {
             noteToBeCreated.actualDate,
             forKey: "actualDate")
         
+        newNoteToBeCreated.setValue(
+            noteToBeCreated.recurring,
+            forKey: "recurring")
+        
+        newNoteToBeCreated.setValue(
+            noteToBeCreated.paid,
+            forKey: "paid")
+        
         do {
             try intoManagedObjectContext.save()
             count += 1
         } catch let error as NSError {
-            // TODO error handling
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
@@ -94,6 +101,14 @@ class NoteCoreDataHelper {
             noteManagedObjectToBeChanged.setValue(
                 noteToBeChanged.notes,
                 forKey: "notes")
+            
+            noteManagedObjectToBeChanged.setValue(
+                noteToBeChanged.recurring,
+                forKey: "recurring")
+            
+            noteManagedObjectToBeChanged.setValue(
+                noteToBeChanged.paid,
+                forKey: "paid")
 
             // save
             try inManagedObjectContext.save()
@@ -121,7 +136,9 @@ class NoteCoreDataHelper {
                     notes: noteManagedObjectRead.value(forKey: "notes") as!           String,
                     amount: noteManagedObjectRead.value(forKey: "amount") as!         String,
                     noteType: noteManagedObjectRead.value(forKey: "noteType") as!     String,
-                    actualDate: noteManagedObjectRead.value(forKey: "actualDate") as! Date))
+                    actualDate: noteManagedObjectRead.value(forKey: "actualDate") as! Date,
+                    recurring: noteManagedObjectRead.value(forKey: "recurring") as!   Bool,
+                    paid: noteManagedObjectRead.value(forKey: "paid") as! Bool))
             }
         } catch let error as NSError {
             // TODO error handling
@@ -150,10 +167,12 @@ class NoteCoreDataHelper {
             return SimpleNote.init(
                 noteId:        noteManagedObjectToBeRead.value(forKey: "noteId")        as! UUID,
                 noteTitle:     noteManagedObjectToBeRead.value(forKey: "noteTitle")     as! String,
-                notes:         noteManagedObjectToBeRead.value(forKey: "notes")      as!    String,
-                amount:        noteManagedObjectToBeRead.value(forKey: "amount")      as!   String,
-                noteType:        noteManagedObjectToBeRead.value(forKey: "noteType")    as! String,
-                actualDate: noteManagedObjectToBeRead.value(forKey: "actualDate") as! Date)
+                notes:         noteManagedObjectToBeRead.value(forKey: "notes")         as! String,
+                amount:        noteManagedObjectToBeRead.value(forKey: "amount")        as! String,
+                noteType:      noteManagedObjectToBeRead.value(forKey: "noteType")      as! String,
+                actualDate: noteManagedObjectToBeRead.value(forKey: "actualDate")       as! Date,
+                recurring: noteManagedObjectToBeRead.value(forKey: "recurring")         as! Bool,
+                paid: noteManagedObjectToBeRead.value(forKey: "paid") as! Bool)
         } catch let error as NSError {
             // TODO error handling
             print("Could not read. \(error), \(error.userInfo)")
@@ -188,8 +207,6 @@ class NoteCoreDataHelper {
             }
             
         } catch let error as NSError {
-            
-            // TODO error handling
             print("Could not delete. \(error), \(error.userInfo)")
             
         }

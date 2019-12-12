@@ -24,6 +24,7 @@
 		0F32F2DD235E1C9400A438D2 /* NoteCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F32F2DC235E1C9400A438D2 /* NoteCoreDataHelper.swift */; };
 		0F32F2E0235E1DD700A438D2 /* NotesData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F32F2DE235E1DD700A438D2 /* NotesData.xcdatamodeld */; };
 		0F32F2E2235E214E00A438D2 /* SimpleNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F32F2E1235E214E00A438D2 /* SimpleNote.swift */; };
+		0F516A1023A18C8E00804435 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F516A0F23A18C8E00804435 /* SettingsViewController.swift */; };
 		0F6A51DE2375144C0049C2C9 /* MVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6A51DD2375144C0049C2C9 /* MVExtension.swift */; };
 		0F768455236F645300DB878D /* CreateChangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F768454236F645300DB878D /* CreateChangeExtension.swift */; };
 		0F8777CD236C8B9000788D06 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8777CC236C8B9000788D06 /* TestViewController.swift */; };
@@ -53,6 +54,7 @@
 		0F32F2DC235E1C9400A438D2 /* NoteCoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCoreDataHelper.swift; sourceTree = "<group>"; };
 		0F32F2DF235E1DD700A438D2 /* NotesData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesData.xcdatamodel; sourceTree = "<group>"; };
 		0F32F2E1235E214E00A438D2 /* SimpleNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNote.swift; sourceTree = "<group>"; };
+		0F516A0F23A18C8E00804435 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F6A51DD2375144C0049C2C9 /* MVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVExtension.swift; sourceTree = "<group>"; };
 		0F768454236F645300DB878D /* CreateChangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChangeExtension.swift; sourceTree = "<group>"; };
 		0F8777CC236C8B9000788D06 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,17 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		0F516A1123A1B00500804435 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0F6A51DD2375144C0049C2C9 /* MVExtension.swift */,
+				0F9CE9082360AB41002CAA26 /* DetailExtension.swift */,
+				0F768454236F645300DB878D /* CreateChangeExtension.swift */,
+				0F0563A523937E9C00D50BD9 /* CalcExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0F88746E2378C3FA006F2123 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,14 +189,12 @@
 			isa = PBXGroup;
 			children = (
 				0F32F2C9235AAB6100A438D2 /* MasterViewController.swift */,
-				0F6A51DD2375144C0049C2C9 /* MVExtension.swift */,
 				0F32F2CB235AAB6100A438D2 /* DetailViewController.swift */,
-				0F9CE9082360AB41002CAA26 /* DetailExtension.swift */,
 				0F2F1972235E4D92003CB9F3 /* CreateChangeVC.swift */,
-				0F768454236F645300DB878D /* CreateChangeExtension.swift */,
 				0F02FDE2237EE68A001E6F5D /* IntroViewController.swift */,
 				0F947ADD2384544500DDB42C /* CalculatorController.swift */,
-				0F0563A523937E9C00D50BD9 /* CalcExtension.swift */,
+				0F516A0F23A18C8E00804435 /* SettingsViewController.swift */,
+				0F516A1123A1B00500804435 /* Extensions */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -264,6 +275,7 @@
 			files = (
 				0F8777CD236C8B9000788D06 /* TestViewController.swift in Sources */,
 				0F9CE9092360AB41002CAA26 /* DetailExtension.swift in Sources */,
+				0F516A1023A18C8E00804435 /* SettingsViewController.swift in Sources */,
 				0F6A51DE2375144C0049C2C9 /* MVExtension.swift in Sources */,
 				0F32F2C6235AAB6100A438D2 /* AppDelegate.swift in Sources */,
 				0F32F2C8235AAB6100A438D2 /* SceneDelegate.swift in Sources */,
