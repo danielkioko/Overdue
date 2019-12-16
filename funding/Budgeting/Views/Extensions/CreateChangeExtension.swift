@@ -71,9 +71,9 @@ extension CreateChange {
         noteTextAmountView.leftViewMode = UITextField.ViewMode.always
         noteTextTypeView.leftViewMode = UITextField.ViewMode.always
         
-        notesLayer.layer.cornerRadius = 6
-        notesLayer.layer.shadowRadius = 0.8
-        notesLayer.layer.borderWidth = 1.0
+//        notesLayer.layer.cornerRadius = 6
+//        notesLayer.layer.shadowRadius = 0.8
+//        notesLayer.layer.borderWidth = 1.0
         notesLayer.layer.borderColor = UIColor.lightGray.cgColor
         
         doneButtonLayer.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.2352941176, blue: 0.4470588235, alpha: 1)

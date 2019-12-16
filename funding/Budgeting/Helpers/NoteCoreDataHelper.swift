@@ -130,15 +130,17 @@ class NoteCoreDataHelper {
             let fetchedNotesFromCoreData = try fromManagedObjectContext.fetch(fetchRequest)
             fetchedNotesFromCoreData.forEach { (fetchRequestResult) in
                 let noteManagedObjectRead = fetchRequestResult as! NSManagedObject
+                
                 returnedNotes.append(SimpleNote.init(
-                    noteId: noteManagedObjectRead.value(forKey: "noteId") as!         UUID,
-                    noteTitle: noteManagedObjectRead.value(forKey: "noteTitle")as!    String,
-                    notes: noteManagedObjectRead.value(forKey: "notes") as!           String,
-                    amount: noteManagedObjectRead.value(forKey: "amount") as!         String,
-                    noteType: noteManagedObjectRead.value(forKey: "noteType") as!     String,
+                    noteId:     noteManagedObjectRead.value(forKey: "noteId") as! UUID,
+                    noteTitle:  noteManagedObjectRead.value(forKey: "noteTitle") as! String,
+                    notes:      noteManagedObjectRead.value(forKey: "notes") as! String,
+                    amount:     noteManagedObjectRead.value(forKey: "amount") as! String,
+                    noteType:   noteManagedObjectRead.value(forKey: "noteType") as! String,
                     actualDate: noteManagedObjectRead.value(forKey: "actualDate") as! Date,
-                    recurring: noteManagedObjectRead.value(forKey: "recurring") as!   Bool,
-                    paid: noteManagedObjectRead.value(forKey: "paid") as! Bool))
+                    recurring:  noteManagedObjectRead.value(forKey: "recurring") as! Bool,
+                    paid:       noteManagedObjectRead.value(forKey: "paid") as! Bool))
+                
             }
         } catch let error as NSError {
             // TODO error handling
@@ -164,15 +166,16 @@ class NoteCoreDataHelper {
         do {
             let fetchedNotesFromCoreData = try fromManagedObjectContext.fetch(fetchRequest)
             let noteManagedObjectToBeRead = fetchedNotesFromCoreData[0] as! NSManagedObject
+            
             return SimpleNote.init(
-                noteId:        noteManagedObjectToBeRead.value(forKey: "noteId")        as! UUID,
-                noteTitle:     noteManagedObjectToBeRead.value(forKey: "noteTitle")     as! String,
-                notes:         noteManagedObjectToBeRead.value(forKey: "notes")         as! String,
-                amount:        noteManagedObjectToBeRead.value(forKey: "amount")        as! String,
-                noteType:      noteManagedObjectToBeRead.value(forKey: "noteType")      as! String,
-                actualDate: noteManagedObjectToBeRead.value(forKey: "actualDate")       as! Date,
-                recurring: noteManagedObjectToBeRead.value(forKey: "recurring")         as! Bool,
-                paid: noteManagedObjectToBeRead.value(forKey: "paid") as! Bool)
+                noteId:     noteManagedObjectToBeRead.value(forKey: "noteId") as! UUID,
+                noteTitle:  noteManagedObjectToBeRead.value(forKey: "noteTitle") as! String,
+                notes:      noteManagedObjectToBeRead.value(forKey: "notes") as! String,
+                amount:     noteManagedObjectToBeRead.value(forKey: "amount") as! String,
+                noteType:   noteManagedObjectToBeRead.value(forKey: "noteType") as! String,
+                actualDate: noteManagedObjectToBeRead.value(forKey: "actualDate") as! Date,
+                recurring:  noteManagedObjectToBeRead.value(forKey: "recurring") as! Bool,
+                paid:       noteManagedObjectToBeRead.value(forKey: "paid") as! Bool)
         } catch let error as NSError {
             // TODO error handling
             print("Could not read. \(error), \(error.userInfo)")

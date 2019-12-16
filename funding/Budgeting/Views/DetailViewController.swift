@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
     
     let shapeLayer = CAShapeLayer()
 
-   func configureView() {
+    func configureView() {
        if let detail = detailItem {
            if let topicLabel = noteTitleLabel,
               let dateLabel = noteDateLabel,

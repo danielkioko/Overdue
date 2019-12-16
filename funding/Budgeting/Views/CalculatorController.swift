@@ -38,7 +38,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     var modOccured = false
     var decimal : Bool = false
     
-    var audioPlayer : AVAudioPlayer!
     let url = Bundle.main.url(forResource: "click", withExtension: "wav")
 
     override func viewDidLoad() {
@@ -47,7 +46,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func numButtonsPressed(_ sender: UIButton) {
-        playSound()
         //print(sender.tag)
         if (displayNum.text! == "0" || displayNum.text! == "+" || displayNum.text! == "-" || displayNum.text! == "*" || displayNum.text! == "/" || modOccured ) && !(sender.tag == 0) && !(sender.tag==100){
             displayNum.text = String(sender.tag)
@@ -61,9 +59,7 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    
     @IBAction func performOperation(_ sender: UIButton) {
-        playSound()
         if prevNum==0 {
             prevNum = Double(displayNum.text!) ?? 0
             decimal = false
@@ -107,7 +103,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     
     
     @IBAction func clearScreen(_ sender: UIButton) {
-        playSound()
         displayNum.text = "0"
         prevNum = 0
         currentNum = 0
@@ -118,7 +113,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     
     
     @IBAction func invertnum(_ sender: UIButton) {
-        playSound()
         currentNum = Double(displayNum.text!) ?? 0
         currentNum = -currentNum
         displayNum.text = String(currentNum)
@@ -126,7 +120,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func erase(_ sender: UIButton) {
-        playSound()
         if displayNum.text!.count > 1{
             let index = displayNum.text!.index(before: displayNum.text!.endIndex)
             displayNum.text = String(displayNum.text![..<index])
@@ -140,9 +133,6 @@ class CalculatorController: UIViewController, AVAudioPlayerDelegate {
             displayNum.text = "0"
             decimal = false
         }
-    }
-    
-    func playSound(){
     }
     
 }
