@@ -32,6 +32,9 @@
 		0F947ADE2384544500DDB42C /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F947ADD2384544500DDB42C /* CalculatorController.swift */; };
 		0F9CE9092360AB41002CAA26 /* DetailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CE9082360AB41002CAA26 /* DetailExtension.swift */; };
 		0FA943662365193D002EBB52 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA943652365193D002EBB52 /* HomeCollectionViewController.swift */; };
+		0FC714CF23AD98EB00CBF084 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC714CE23AD98EB00CBF084 /* MainViewController.swift */; };
+		0FC714D323AD9E2400CBF084 /* UpcomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC714D123AD9E2300CBF084 /* UpcomingViewCell.swift */; };
+		0FC714D423AD9E2400CBF084 /* UpcomingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,9 @@
 		0F947ADD2384544500DDB42C /* CalculatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorController.swift; sourceTree = "<group>"; };
 		0F9CE9082360AB41002CAA26 /* DetailExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailExtension.swift; sourceTree = "<group>"; };
 		0FA943652365193D002EBB52 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewController.swift; sourceTree = "<group>"; };
+		0FC714CE23AD98EB00CBF084 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0FC714D123AD9E2300CBF084 /* UpcomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewCell.swift; sourceTree = "<group>"; };
+		0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 		0F2F1976235E5E7D003CB9F3 /* Budgeting */ = {
 			isa = PBXGroup;
 			children = (
+				0FC714D023AD9E0900CBF084 /* Cells */,
 				0F9CE90D2360B6C2002CAA26 /* Views */,
 				0F2F1974235E5E1A003CB9F3 /* Note */,
 				0F32F2DB235E1C7D00A438D2 /* Helpers */,
@@ -188,6 +195,7 @@
 		0F9CE90D2360B6C2002CAA26 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0FC714CE23AD98EB00CBF084 /* MainViewController.swift */,
 				0F32F2C9235AAB6100A438D2 /* MasterViewController.swift */,
 				0F32F2CB235AAB6100A438D2 /* DetailViewController.swift */,
 				0F2F1972235E4D92003CB9F3 /* CreateChangeVC.swift */,
@@ -197,6 +205,15 @@
 				0F516A1123A1B00500804435 /* Extensions */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0FC714D023AD9E0900CBF084 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0FC714D123AD9E2300CBF084 /* UpcomingViewCell.swift */,
+				0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +279,7 @@
 			files = (
 				0F32F2D4235AAB6400A438D2 /* LaunchScreen.storyboard in Resources */,
 				0F32F2D1235AAB6400A438D2 /* Assets.xcassets in Resources */,
+				0FC714D423AD9E2400CBF084 /* UpcomingViewCell.xib in Resources */,
 				0F32F2CF235AAB6100A438D2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F8777CD236C8B9000788D06 /* TestViewController.swift in Sources */,
+				0FC714CF23AD98EB00CBF084 /* MainViewController.swift in Sources */,
 				0F9CE9092360AB41002CAA26 /* DetailExtension.swift in Sources */,
 				0F516A1023A18C8E00804435 /* SettingsViewController.swift in Sources */,
 				0F6A51DE2375144C0049C2C9 /* MVExtension.swift in Sources */,
@@ -281,6 +300,7 @@
 				0F32F2C8235AAB6100A438D2 /* SceneDelegate.swift in Sources */,
 				0FA943662365193D002EBB52 /* HomeCollectionViewController.swift in Sources */,
 				0F0563A623937E9C00D50BD9 /* CalcExtension.swift in Sources */,
+				0FC714D323AD9E2400CBF084 /* UpcomingViewCell.swift in Sources */,
 				0F32F2DD235E1C9400A438D2 /* NoteCoreDataHelper.swift in Sources */,
 				0F947ADE2384544500DDB42C /* CalculatorController.swift in Sources */,
 				0F2F1971235E47CC003CB9F3 /* NoteTableViewCell.swift in Sources */,

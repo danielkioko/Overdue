@@ -11,6 +11,26 @@ import UIKit
 
 extension MasterViewController {
     
+    func calculateRemainder(budgetedAmount: Int) -> Int {
+        
+        var totalCount: Int = 0
+        var i = 0
+        
+        while (i < NoteStorage.storage.count()) {
+            
+            let object = NoteStorage.storage.readNote(at: i)
+            totalCount += Int(object!.amount)!
+            
+            i += 1
+            
+        }
+        
+        return budgetedAmount - totalCount
+    }
+    
+    func customize() {
+    }
+    
     func calculateTotalForMonth() {
         
         var amounts: [Int] = []
@@ -37,71 +57,7 @@ extension MasterViewController {
             total = amounts.reduce(0, +)
             j += 1
         }
-        
-        totalLabel.text = String(total).currencyFormatting()
-        
-    }
-    
-    func calculateUpcomingDues() {
-        
-        var amounts:[Int] = []
-        var total: Int = 0
-        var i = 0
-        var j = 0
-        
-        while (i < NoteStorage.storage.count()) {
-            
-            let object = NoteStorage.storage.readNote(at: i)
-            
-            if (object!.actualDate >= Date()) {
                 
-                if let object = NoteStorage.storage.readNote(at: i) {
-                    amounts.append(Int(object.amount) ?? 0)
-                }
-                
-            }
-            
-            i += 1
-        }
-        
-        while (j <= NoteStorage.storage.count()) {
-            total = amounts.reduce(0, +)
-            j += 1
-        }
-        
-        totalLabel.text = String(total).currencyFormatting()
-        
-    }
-    
-    func calculateOverDues() {
-        
-        var amounts:[Int] = []
-        var total: Int = 0
-        var i = 0
-        var j = 0
-        
-        while (i < NoteStorage.storage.count()) {
-            
-            let object = NoteStorage.storage.readNote(at: i)
-            
-            if (object!.actualDate < Date()) {
-                
-                if let object = NoteStorage.storage.readNote(at: i) {
-                    amounts.append(Int(object.amount) ?? 0)
-                }
-                
-            }
-            
-            i += 1
-        }
-        
-        while (j <= NoteStorage.storage.count()) {
-            total = amounts.reduce(0, +)
-            j += 1
-        }
-        
-        totalLabel.text = String(total).currencyFormatting()
-        
     }
     
     func getCurrentMonthItems(date: Date) -> Date {

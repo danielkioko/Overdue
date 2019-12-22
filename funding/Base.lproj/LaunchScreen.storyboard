@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,54 +15,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="89M-iw-Va5">
-                                <rect key="frame" x="20" y="546" width="374" height="221"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="221" id="SVz-Au-kSc"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plant" translatesAutoresizingMaskIntoConstraints="NO" id="AMF-SG-ILG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydb-V4-nSm">
-                                <rect key="frame" x="20" y="785" width="374" height="55"/>
+                                <rect key="frame" x="20" y="825.5" width="374" height="14.5"/>
                                 <string key="text"> © Daniel Kioko 2020
 copyright sign
 Unicode: U+00A9, UTF-8: C2 A9</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xM3-W9-0FD">
-                                <rect key="frame" x="87" y="344" width="240" height="52"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overdue." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ay7-9G-THF">
-                                        <rect key="frame" x="8" y="9.5" width="224" height="34.5"/>
-                                        <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="28"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.15686274510000001" green="0.20784313730000001" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="Ay7-9G-THF" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="top" constant="9.5" id="6kb-9d-avT"/>
-                                    <constraint firstItem="Ay7-9G-THF" firstAttribute="leading" secondItem="xM3-W9-0FD" secondAttribute="leading" constant="8" id="VeE-VW-j5i"/>
-                                    <constraint firstAttribute="height" constant="52" id="a2a-kr-XYZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ay7-9G-THF" secondAttribute="trailing" constant="8" id="fyM-YV-UNA"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ay7-9G-THF" secondAttribute="bottom" constant="8" id="pAf-oW-vVF"/>
-                                </constraints>
-                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overdue." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ay7-9G-THF">
+                                <rect key="frame" x="20" y="124" width="374" height="35"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="28"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="xM3-W9-0FD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="DnS-2G-ZaM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="89M-iw-Va5" secondAttribute="trailing" constant="20" id="HAp-5c-jZS"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xM3-W9-0FD" secondAttribute="trailing" constant="87" id="JM7-HD-1HU"/>
-                            <constraint firstItem="xM3-W9-0FD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="300" id="JtJ-IR-Cp3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ay7-9G-THF" secondAttribute="trailing" constant="20" id="1Sh-Xg-hnM"/>
+                            <constraint firstAttribute="bottom" secondItem="AMF-SG-ILG" secondAttribute="bottom" id="7V4-Cb-eel"/>
+                            <constraint firstItem="AMF-SG-ILG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ap2-9a-5gB"/>
+                            <constraint firstItem="AMF-SG-ILG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Jkw-ap-stW"/>
+                            <constraint firstItem="Ay7-9G-THF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="KmW-b9-e0F"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ydb-V4-nSm" secondAttribute="bottom" constant="22" id="Nnl-LK-F7a"/>
-                            <constraint firstItem="89M-iw-Va5" firstAttribute="top" secondItem="xM3-W9-0FD" secondAttribute="bottom" constant="150" id="YIN-SG-3HP"/>
-                            <constraint firstItem="Ydb-V4-nSm" firstAttribute="top" secondItem="89M-iw-Va5" secondAttribute="bottom" constant="18" id="epL-gP-mfs"/>
+                            <constraint firstItem="AMF-SG-ILG" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="YES-tc-Va5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ydb-V4-nSm" secondAttribute="trailing" constant="20" id="iS4-UI-cnI"/>
+                            <constraint firstItem="Ay7-9G-THF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kVx-79-UV7"/>
                             <constraint firstItem="Ydb-V4-nSm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="nh2-cx-GVU"/>
-                            <constraint firstItem="89M-iw-Va5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vjM-E2-i4P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -73,6 +56,6 @@ Unicode: U+00A9, UTF-8: C2 A9</string>
         </scene>
     </scenes>
     <resources>
-        <image name="backgroundImage" width="1411" height="995"/>
+        <image name="plant" width="4000" height="6000"/>
     </resources>
 </document>

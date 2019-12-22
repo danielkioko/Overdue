@@ -15,10 +15,12 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var noteTextAmountView: UITextField!
     @IBOutlet weak var noteTextTypeView: UITextField!
     @IBOutlet weak var noteActualDate: UIDatePicker!
-    @IBOutlet weak var noteRecurringSwitch: UISwitch!
     @IBOutlet weak var notesText: UITextView!
     @IBOutlet weak var noteIcon: UIImageView!
     @IBOutlet var notesLayer: UIView!
+    @IBOutlet var dateTextView: UITextField!
+    
+    @IBOutlet var button: UIButton!
     
     @IBOutlet var doneButton: UIButton!
     @IBOutlet var doneButtonLayer: UIView!
@@ -47,12 +49,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         customize()
         selectType()
         enableCloseKeyboard()
-        
-        if noteRecurringSwitch.isOn {
-            isRecurring = true
-        } else {
-            isRecurring = false
-        }
         
     }
     
@@ -148,6 +144,25 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     
     }
     
+    @IBAction func actionRecurry(_ sender: Any) {
+        if (button.isSelected == false) {
+            button.isSelected = true
+            button.layer.borderWidth = 2.0
+            button.layer.opacity = 1.0
+            button.layer.borderColor = UIColor.orange.cgColor
+        } else {
+            button.isSelected = false
+            button.layer.opacity = 0.8
+            button.layer.borderWidth = 0.0
+        }
+    }
+    
+    
+    func stringToDate(dateString: String) -> Date {
+        let date = dateString.toDate()
+        return date!
+    }
+    
     private func addItem() -> Void {
 
         let note = SimpleNote(
@@ -155,7 +170,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             amount:     noteTextAmountView.text!,
             notes:      notesText.text!,
             noteType:   noteTextTypeView.text!,
-            actualDate: noteActualDate.date,
+            actualDate: (dateTextView.text?.toDate())!,
             recurring:  true,
             paid:       true)
         
@@ -175,7 +190,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     notes:          notesText.text!,
                     amount:         noteTextAmountView.text!,
                     noteType:       noteTextTypeView.text!,
-                    actualDate:     noteActualDate.date,
+                    actualDate:     (dateTextView.text?.toDate())!,
                     recurring:      true,
                     paid:           true)
                 

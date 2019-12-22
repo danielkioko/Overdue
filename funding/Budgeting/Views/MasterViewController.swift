@@ -16,12 +16,8 @@ class MasterViewController: UITableViewController {
     @IBOutlet var tableuxView: UITableView!
     
     var objects = [Any]()
-    @IBOutlet var totalLayer: UIView!
-    
-    @IBOutlet var totalLabel: UILabel!
     @IBOutlet var selector: UISegmentedControl!
     @IBOutlet var topView: UIView!
-    @IBOutlet var dueLabel: UILabel!
     
     var segmentIndex:Int = 0
         
@@ -32,6 +28,8 @@ class MasterViewController: UITableViewController {
         tableuxView.dataSource = self
         
         tableuxView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        customize()
         
         self.navigationItem.title = ""
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
@@ -65,107 +63,43 @@ class MasterViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         //navigationItem.leftBarButtonItem = editButtonItem
         
-        let addItemBtnImage = UIImage(named: "new")
-        let addItemBtn = UIBarButtonItem()
-        addItemBtn.setBackgroundImage(addItemBtnImage, for: UIControl.State.normal, barMetrics: UIBarMetrics(rawValue: 0)!)
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+//        let addItemBtnImage = UIImage(named: "new")
+//        let addItemBtn = UIBarButtonItem()
+//        addItemBtn.setBackgroundImage(addItemBtnImage, for: UIControl.State.normal, barMetrics: UIBarMetrics(rawValue: 0)!)
+//
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+//        navigationItem.rightBarButtonItem = addButton
         
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
-        }
-    
-        calculateTotal()
-        
+//        if let split = splitViewController {
+//            let controllers = split.viewControllers
+//            detailViewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? DetailViewController
+//        }
+            
     }
-    
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willCommitWithAnimator animator: UIContextMenuInteractionCommitAnimating) {
-        animator.addCompletion {
-            self.show(MasterViewController(), sender: self)
-        }
-    }
-    
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { suggestedActions in
-//            return self.makeContextMenu()
-//        })
-//    }
-    
-    func makeContextMenu() -> UIMenu {
-
-        let edit = UIAction(title: "Edit", image: UIImage(systemName: "square.and.arrow.up")) { action in
-
-        }
-
-        let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action: "someAction")
-        //navigationItem.leftBarButtonItem = button
-
-        return UIMenu(title: "edit", image: UIImage(named: "delete"))
-
-    }
-    
     
     @IBAction func indexControl(_ sender: Any) {
         if selector.selectedSegmentIndex == 0 {
             segmentIndex = 0
             tableView.reloadData()
-            calculateTotal()
         } else if selector.selectedSegmentIndex == 1 {
             segmentIndex = 1
             tableView.reloadData()
-            calculateTotal()
         } else if selector.selectedSegmentIndex == 2 {
             segmentIndex = 2
             tableView.reloadData()
-            calculateTotal()
         }
     }
-    
-    func calculateTotal() {
-        
-        if (selector.selectedSegmentIndex == 0) {
-            var amounts: [Int] = []
-            var total: Int = 0
-            
-            var i = 0
-            var j = 0
-            
-            while (i < NoteStorage.storage.count()) {
-                    
-                    if let object = NoteStorage.storage.readNote(at: i){
-                        amounts.append(Int(object.amount) ?? 0)
-                    }
-                    
-                    i += 1
-                    
-                }
-                
-                while (j <= NoteStorage.storage.count()) {
-                    total = amounts.reduce(0, +)
-                    j += 1
-                }
-                
-                totalLabel.text = String(total).currencyFormatting()
-        } else if (selector.selectedSegmentIndex == 1) {
-            calculateUpcomingDues()
-        } else if (selector.selectedSegmentIndex == 2) {
-            calculateOverDues()
-        }
-        
-    }
 
-    override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+//        super.viewWillAppear(animated)
+//    }
 
-    @objc
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
-    }
+//    @objc
+//    func insertNewObject(_ sender: Any) {
+//        objects.insert(NSDate(), at: 0)
+//        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
+//    }
 
     // MARK: - Segues
     
@@ -218,18 +152,13 @@ class MasterViewController: UITableViewController {
             
         }
         
-        cell.cellView.layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        cell.cellView.layer.cornerRadius = 4
-        cell.cellBar.layer.cornerRadius = 4
-        cell.cellView.layer.borderWidth = 0.0
-        cell.cellView.layer.masksToBounds = true
-        cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        cell.cellView.layer.shadowColor = #colorLiteral(red: 0.2156862745, green: 0.3294117647, blue: 0.6666666667, alpha: 1)
-        cell.cellView.layer.shadowRadius = 2
+        cell.cellView.layer.cornerRadius = 10
+        cell.cellBar.layer.cornerRadius = 10
+        cell.cellView.layer.shadowColor = UIColor.black.cgColor
+        cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         cell.cellView.layer.shadowOpacity = 0.2
-        cell.cellView.layer.masksToBounds = false
-        cell.cellView.layer.shadowPath = UIBezierPath(roundedRect: cell.cellView.bounds, cornerRadius:         cell.cellView.layer.cornerRadius).cgPath
-         
+        cell.cellView.layer.shadowRadius = 4.0
+        
         return cell
     }
     
@@ -245,14 +174,6 @@ class MasterViewController: UITableViewController {
                     tableView.cellForRow(at: indexPath)?.isHidden = true
                 }
             }
-
-//            if let object = NoteStorage.storage.readNote(at: indexPath.row) {
-//                let today = Date()
-//                let pastWeekDate = getCurrentWeekItems(date: Date())
-//                if (!(pastWeekDate...today ~= object.actualDate)) {
-//                    height = 0.0
-//                }
-//            }
             
         } else if (segmentIndex == 2) {
             
@@ -261,14 +182,6 @@ class MasterViewController: UITableViewController {
                     height = 0.0
                 }
             }
-            
-//            if let object = NoteStorage.storage.readNote(at: indexPath.row) {
-//                let today = Date()
-//                let pastMonthDate = getCurrentMonthItems(date: Date())
-//                if (!(pastMonthDate...today ~= object.actualDate)) {
-//                    height = 0.0
-//                }
-//            }
             
         } else if (segmentIndex == 0) {
             height = 110.0
