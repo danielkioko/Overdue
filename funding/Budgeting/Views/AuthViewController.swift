@@ -15,8 +15,6 @@ class AuthenticateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         if (UserDefaults.standard.bool(forKey: "switchKeyName") == true){
             authenticateUser()
         }
@@ -53,7 +51,7 @@ class AuthenticateViewController: UIViewController {
     }
     
     func proceedToApp() {
-       if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabVC") as? TabVC {
+       if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Main") as? MainViewController {
            if let navigator = navigationController {
                navigator.pushViewController(viewController, animated: true)
            }

@@ -117,7 +117,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         totalLabel.text = String(total).currencyFormatting()
-        remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
+        remainingLabel.text = (String(budgetedAmount ?? 0 - total).currencyFormatting()) + " remaining"
         
         if (total == 0) {
             upcomingText.isHidden = true
