@@ -22,9 +22,10 @@ class DetailViewController: UIViewController {
     @IBOutlet var ebLayer: UIView!
     
     let shapeLayer = CAShapeLayer()
-
+    
     func configureView() {
        if let detail = detailItem {
+        
            if let topicLabel = noteTitleLabel,
               let dateLabel = noteDateLabel,
               let typeLabel = noteTypeView,
@@ -45,15 +46,12 @@ class DetailViewController: UIViewController {
     }
     
     func loadCardView() {
-        cardView.layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        cardView.layer.cornerRadius = 4
-        cardView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        cardView.layer.masksToBounds = true
-        cardView.layer.borderWidth = 0.0
-        cardView.layer.shadowRadius = 2
-        cardView.layer.shadowPath = UIBezierPath(roundedRect: cardView.layer.bounds, cornerRadius:         cardView.layer.cornerRadius).cgPath
-        cardView.layer.masksToBounds = false
-        cardView.layer.backgroundColor = UIColor.white.cgColor
+        
+        cardView.layer.cornerRadius = 20
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        cardView.layer.shadowOpacity = 0.2
+        cardView.layer.shadowRadius = 4.0
         
     }
     

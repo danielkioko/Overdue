@@ -20,6 +20,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var preferencesLayer:UIView!
     @IBOutlet var upcomingText: UILabel!
     
+    @IBOutlet var barOuterLayer: UIView!
+    @IBOutlet var barInnerLayer: UIView!
+    
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
     @IBOutlet var remainingLabel: UILabel!
@@ -90,7 +93,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
         var amounts: [Int] = []
         var total: Int = 0
-        let budgetedAmount = 100000
+        let budgetAmt = UserDefaults.standard.string(forKey: "budgetConstName")
+        let budgetedAmount = Int(budgetAmt ?? "0")
             
         var i = 0
         var j = 0
@@ -113,7 +117,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         totalLabel.text = String(total).currencyFormatting()
-        remainingLabel.text = (String(budgetedAmount - total).currencyFormatting()) + " remaining"
+        remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
         
         if (total == 0) {
             upcomingText.isHidden = true
@@ -121,6 +125,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             upcomingText.isHidden = false
         }
         
+//        let percentage = ((500000 - total) * 100) / total
+//        updateBarChart(prc: percentage)
+        
+    }
+    
+    func updateBarChart(prc: Int) {
+                
     }
 
     func countOnlyUpcomingBills() -> Int {
@@ -163,6 +174,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         preferencesLayer.layer.shadowOffset = CGSize(width: 0, height: 5.0)
         preferencesLayer.layer.shadowOpacity = 0.2
         preferencesLayer.layer.shadowRadius = 4.0
+        
+//        barOuterLayer.layer.cornerRadius = 20
+//        barOuterLayer.layer.shadowColor = UIColor.black.cgColor
+//        barOuterLayer.layer.shadowOffset = CGSize(width: 0, height: 2.5)
+//        barOuterLayer.layer.shadowOpacity = 0.2
+//        barOuterLayer.layer.shadowRadius = 4.0
         
         
     }

@@ -16,14 +16,11 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var noteTextTypeView: UITextField!
     @IBOutlet weak var noteActualDate: UIDatePicker!
     @IBOutlet weak var notesText: UITextView!
-    @IBOutlet weak var noteIcon: UIImageView!
     @IBOutlet var notesLayer: UIView!
-    @IBOutlet var dateTextView: UITextField!
+    @IBOutlet var cardLayer: UIView!
+    @IBOutlet var reOccurringToggle: UISwitch!
     
-    @IBOutlet var button: UIButton!
-    
-    @IBOutlet var doneButton: UIButton!
-    @IBOutlet var doneButtonLayer: UIView!
+    @IBOutlet var doneButton: UIView!
     @IBOutlet var datePickerLayer: UIView!
     
     var gradientLayer = CAGradientLayer()
@@ -31,7 +28,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     var currentDate: String = ""
     var reminderDate: String = ""
     var isRecurring: Bool = false
-    var isPaid: Bool = false
     
     var importedResult:String = ""
     
@@ -39,14 +35,30 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
 
     var typeItems = ["Household", "Taxes", "Debits", "Other"]
     var typePicker = UIPickerView()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        doneButton.layer.cornerRadius = 20
+        doneButton.layer.shadowColor = UIColor.black.cgColor
+        doneButton.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        doneButton.layer.shadowOpacity = 0.2
+        doneButton.layer.shadowRadius = 4.0
         
         gradientLayer.frame = self.view.bounds
         self.view.layer.addSublayer(gradientLayer)
         
         customize()
+        
+        if (detailsToFill != nil) {
+            noteTitleTextField.text = detailsToFill?.noteTitle
+            noteTextTypeView.text = detailsToFill?.noteType
+            noteActualDate.date = detailsToFill!.actualDate
+            noteTextAmountView.text = detailsToFill?.amount.currencyFormatting()
+            notesText.text = detailsToFill?.notes
+            reOccurringToggle.isOn = detailsToFill!.recurring
+        }
+        
         selectType()
         enableCloseKeyboard()
         
@@ -58,21 +70,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return typeItems.count
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        noteTextTypeView.text = typeItems[row]
-        
-        var i = 0
-        while (i < typeItems.count) {
-            
-            if (i <= typeItems.count) {
-                noteIcon.image = UIImage(named: typeItems[row])
-            }
-            
-            i = i + 1
-        }
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -126,6 +123,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             actions: [markAsPaidAction, ignoreAction],
             intentIdentifiers: [],
             options: [])
+        
         center.setNotificationCategories([alarmCategory])
         
         content.title = noteTitleTextField.text!
@@ -134,29 +132,27 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
         
+        var heure = 12
+        var minuite = 00
+        
+        if let dateInSettings = UserDefaults.standard.string(forKey: "timeConst") {
+            let time = dateInSettings.toDate(dateFormat: "HH:mm")
+            let calendar = Calendar.current
+            heure = calendar.component(.hour, from: time)
+            minuite = calendar.component(.minute, from: time)
+        }
+        
         var dateComponents = DateComponents()
-        dateComponents.hour = 18
-        dateComponents.minute = 53
+        
+        dateComponents.hour = heure
+        dateComponents.minute = minuite
+        
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
     
     }
-    
-    @IBAction func actionRecurry(_ sender: Any) {
-        if (button.isSelected == false) {
-            button.isSelected = true
-            button.layer.borderWidth = 2.0
-            button.layer.opacity = 1.0
-            button.layer.borderColor = UIColor.orange.cgColor
-        } else {
-            button.isSelected = false
-            button.layer.opacity = 0.8
-            button.layer.borderWidth = 0.0
-        }
-    }
-    
     
     func stringToDate(dateString: String) -> Date {
         let date = dateString.toDate()
@@ -170,8 +166,8 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             amount:     noteTextAmountView.text!,
             notes:      notesText.text!,
             noteType:   noteTextTypeView.text!,
-            actualDate: (dateTextView.text?.toDate())!,
-            recurring:  true,
+            actualDate: noteActualDate.date,
+            recurring:  reOccurringToggle.isOn,
             paid:       true)
         
         NoteStorage.storage.addNote(noteToBeAdded: note)
@@ -190,8 +186,8 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     notes:          notesText.text!,
                     amount:         noteTextAmountView.text!,
                     noteType:       noteTextTypeView.text!,
-                    actualDate:     (dateTextView.text?.toDate())!,
-                    recurring:      true,
+                    actualDate:     noteActualDate.date,
+                    recurring:      reOccurringToggle.isOn,
                     paid:           true)
                 
             )
@@ -291,6 +287,12 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
            completionHandler()
         }
         
+    }
+
+    var detailsToFill: SimpleNote? {
+        didSet {
+            // Update the view.
+        }
     }
 
 }

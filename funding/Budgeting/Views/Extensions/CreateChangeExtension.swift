@@ -38,15 +38,45 @@ extension CreateChange {
         view.addGestureRecognizer(tap)
     }
     
+    func configureView() {
+       if let detail = detailsToFill {
+        
+           if let topicLabel = noteTitleTextField,
+              let datePicker = noteActualDate,
+              let typeLabel = noteTextTypeView,
+              let notesView = notesText,
+              let textView = noteTextAmountView,
+              let toggle = reOccurringToggle {
+               topicLabel.text = detail.noteTitle
+            typeLabel.text = detail.noteType
+            datePicker.date = detail.actualDate
+            textView.text = detail.amount.currencyFormatting()
+            notesView.text = detail.notes
+            toggle.isOn = detail.recurring
+                
+           }
+       }
+    }
+    
     func customize() {
         
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = UIDatePicker.Mode.date
-        datePicker.minimumDate = Date()
-        datePicker.addTarget(self, action: #selector(CreateChange.datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
-        dateTextView.inputView = datePicker
+        if (detailsToFill != nil) {
+            configureView()
+        }
         
-        button.isSelected = false
+        reOccurringToggle.isSelected = false
+        
+        cardLayer.layer.cornerRadius = 20
+        cardLayer.layer.shadowColor = UIColor.black.cgColor
+        cardLayer.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        cardLayer.layer.shadowOpacity = 0.2
+        cardLayer.layer.shadowRadius = 4.0
+        
+        datePickerLayer.layer.cornerRadius = 20
+        datePickerLayer.layer.shadowColor = UIColor.black.cgColor
+        datePickerLayer.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        datePickerLayer.layer.shadowOpacity = 0.2
+        datePickerLayer.layer.shadowRadius = 4.0
                 
         noteTextAmountView.delegate = self as? UITextFieldDelegate
         typePicker.delegate = self
@@ -69,55 +99,28 @@ extension CreateChange {
         let amountPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 34))
         let typePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 34))
         
-        button.layer.cornerRadius = 10
+        reOccurringToggle.layer.cornerRadius = 10
         
         noteTitleTextField.leftView = titlePaddingView
         noteTextAmountView.leftView = amountPaddingView
         noteTextTypeView.leftView = typePaddingView
         
-        noteTitleTextField.layer.borderWidth = 2
-        noteTitleTextField.layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.2352941176, blue: 0.4470588235, alpha: 1)
-        noteTitleTextField.layer.cornerRadius = 2
+        noteTitleTextField.layer.cornerRadius = 10
         noteTitleTextField.layer.opacity = 0.8
         
-        noteTextAmountView.layer.borderWidth = 2
-        noteTextAmountView.layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.2352941176, blue: 0.4470588235, alpha: 1)
-        noteTextAmountView.layer.cornerRadius = 2
+        noteTextAmountView.layer.cornerRadius = 10
         noteTextAmountView.layer.opacity = 0.8
         
-        noteTextTypeView.layer.borderWidth = 2
-        noteTextTypeView.layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.2352941176, blue: 0.4470588235, alpha: 1)
-        noteTextTypeView.layer.cornerRadius = 2
+        noteTextTypeView.layer.cornerRadius = 10
         noteTextTypeView.layer.opacity = 0.8
         
-        notesLayer.layer.borderWidth = 2
-        notesLayer.layer.borderColor = #colorLiteral(red: 0.1568627451, green: 0.2078431373, blue: 0.3490196078, alpha: 1)
-        notesLayer.layer.cornerRadius = 2
+        notesLayer.layer.cornerRadius = 10
         notesLayer.layer.opacity = 0.8
         
         noteTitleTextField.leftViewMode = UITextField.ViewMode.always
         noteTextAmountView.leftViewMode = UITextField.ViewMode.always
         noteTextTypeView.leftViewMode = UITextField.ViewMode.always
         
-        doneButtonLayer.backgroundColor = #colorLiteral(red: 0.1176470588, green: 0.2352941176, blue: 0.4470588235, alpha: 1)
-        doneButtonLayer.layer.cornerRadius = 12
-        doneButtonLayer.layer.shadowRadius = 9
-        doneButtonLayer.layer.borderWidth = 0.0
-        
-        if (noteTextTypeView.text == "") {
-            noteIcon.image = UIImage(named: typeItems[0])
-            noteTextTypeView.text = String(typeItems[0])
-        } else {
-            noteIcon.image = UIImage(named: noteTextTypeView.text!)
-        }
-        
-    }
-    
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateStyle = DateFormatter.Style.medium
-        formatter.timeStyle = DateFormatter.Style.none
-        dateTextView.text = formatter.string(from: sender.date)
     }
     
 }

@@ -11,6 +11,14 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    let budgetConst = "budgetConstName"
+    let timeConst = "timeConst"
+    let touchIDConst = "switchKeyName"
+    
+    @IBOutlet var budgetField: UITextField!
+    @IBOutlet var timePicker: UIDatePicker!
+    @IBOutlet var touchIDSwitch: UISwitch!
+    
     @IBOutlet var budgetLayer: UIView!
     @IBOutlet var notificationsLayer: UIView!
     @IBOutlet var touchIDLayer: UIView!
@@ -18,7 +26,31 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        
+        if let budgetFieldValue = defaults.string(forKey: budgetConst) {
+            budgetField.text = budgetFieldValue
+        }
+        
+        if let timePickerValue = defaults.string(forKey: timeConst) {
+            timePicker.date = timePickerValue.toDate(dateFormat: "HH:mm")
+        }
+        
+        if (defaults.bool(forKey: touchIDConst)) {
+            touchIDSwitch.isOn = true
+        } else {
+            touchIDSwitch.isOn = false
+        }
+        
         customize()
+    }
+    
+    @IBAction func saveSettings(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.setValue(budgetField.text, forKey: budgetConst)
+        defaults.setValue(timePicker.date.toDateString(dateFormat: "HH:mm"), forKey: timeConst)
+        defaults.setValue(touchIDSwitch.isOn, forKey: touchIDConst)
     }
     
     func customize() {
@@ -47,6 +79,27 @@ class SettingsViewController: UIViewController {
         btnDone.layer.shadowOpacity = 0.2
         btnDone.layer.shadowRadius = 4.0
         
+    }
+    
+}
+
+extension Date
+{
+    func toDateString( dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+}
+
+extension String
+{
+    func toDate( dateFormat format  : String) -> Date
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)!
     }
     
 }

@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) {(accepted, error) in
         if !accepted {
             print("Notifications Denied")
