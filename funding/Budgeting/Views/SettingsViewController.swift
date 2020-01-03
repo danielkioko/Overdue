@@ -55,6 +55,9 @@ class SettingsViewController: UIViewController {
     
     func customize() {
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         budgetLayer.layer.cornerRadius = 20
         budgetLayer.layer.shadowColor = UIColor.black.cgColor
         budgetLayer.layer.shadowOffset = CGSize(width: 0, height: 5.0)

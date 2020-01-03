@@ -62,6 +62,9 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         selectType()
         enableCloseKeyboard()
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -132,15 +135,11 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
         
-        var heure = 12
-        var minuite = 00
-        
-        if let dateInSettings = UserDefaults.standard.string(forKey: "timeConst") {
-            let time = dateInSettings.toDate(dateFormat: "HH:mm")
-            let calendar = Calendar.current
-            heure = calendar.component(.hour, from: time)
-            minuite = calendar.component(.minute, from: time)
-        }
+        let dateInSettings = UserDefaults.standard.string(forKey: "timeConst")
+        let time = dateInSettings!.toDate(dateFormat: "HH:mm")
+        let calendar = Calendar.current
+        let heure = calendar.component(.hour, from: time)
+        let minuite = calendar.component(.minute, from: time)
         
         var dateComponents = DateComponents()
         
@@ -235,7 +234,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     
                 )
                 
-                //addNotification()
+//                addNotification()
                 
                 let center = UNUserNotificationCenter.current()
                 let content = UNMutableNotificationContent()
@@ -257,6 +256,12 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     options: [])
                 center.setNotificationCategories([alarmCategory])
                 
+                let dateInSettings = UserDefaults.standard.string(forKey: "timeConst")
+                let time = dateInSettings!.toDate(dateFormat: "HH:mm")
+                let calendar = Calendar.current
+                let heure = calendar.component(.hour, from: time)
+                let minuite = calendar.component(.minute, from: time)
+                
                 content.title = noteTitleTextField.text!
                 content.body = noteTextAmountView.text! + " Due Soon"
                 content.categoryIdentifier = "alarm"
@@ -264,8 +269,8 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                 content.sound = UNNotificationSound.default
                 
                 var dateComponents = DateComponents()
-                dateComponents.hour = 18
-                dateComponents.minute = 55
+                dateComponents.hour = heure
+                dateComponents.minute = minuite
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -284,6 +289,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                 // show alert
                 self.present(alert, animated: true)
             }
+                        
            completionHandler()
         }
         

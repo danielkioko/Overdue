@@ -29,7 +29,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var objects = [Any]()
     var itemsCount: Int?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +81,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let object = NoteStorage.storage.readNote(at: indexPath.row)
+        let controller = PreviewController()
+        controller.detailItem = object
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func toMaster() {
+        self.performSegue(withIdentifier: "masterSegue", sender: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,6 +168,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func customize() {
         
+        UIScrollView().isScrollEnabled = true
+        UIScrollView().alwaysBounceVertical = true
+        
         headerLayer.layer.cornerRadius = 20
         headerLayer.layer.shadowColor = UIColor.black.cgColor
         headerLayer.layer.shadowOffset = CGSize(width: 0, height: 5.0)
@@ -175,12 +189,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         preferencesLayer.layer.shadowOpacity = 0.2
         preferencesLayer.layer.shadowRadius = 4.0
         
-//        barOuterLayer.layer.cornerRadius = 20
-//        barOuterLayer.layer.shadowColor = UIColor.black.cgColor
-//        barOuterLayer.layer.shadowOffset = CGSize(width: 0, height: 2.5)
-//        barOuterLayer.layer.shadowOpacity = 0.2
-//        barOuterLayer.layer.shadowRadius = 4.0
-        
+        self.tabBarController?.tabBar.shadowImage = UIImage()
+        self.tabBarController?.tabBar.backgroundImage = UIImage()
+        self.tabBarController?.tabBar.clipsToBounds = true
         
     }
     
