@@ -158,6 +158,28 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         return date!
     }
     
+    private func setAsPaid() -> Void {
+        if let changingReallySimpleNote = self.changingReallySimpleNote {
+            
+            if (detailsToFill != nil) {
+            
+                NoteStorage.storage.changeNote(
+                    noteToBeChanged: SimpleNote(
+                        noteId: changingReallySimpleNote.noteId,
+                        noteTitle: detailsToFill!.noteTitle,
+                        notes: detailsToFill!.amount,
+                        amount: detailsToFill!.notes,
+                        noteType: detailsToFill!.noteType,
+                        actualDate: detailsToFill!.actualDate,
+                        recurring: detailsToFill!.recurring,
+                        paid: true))
+                
+            }
+        } else {
+            //Print Error
+        }
+    }
+    
     private func addItem() -> Void {
 
         let note = SimpleNote(
@@ -223,14 +245,14 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                 NoteStorage.storage.changeNote(
                     
                     noteToBeChanged: SimpleNote(
-                        noteId:         changingReallySimpleNote.noteId,
-                        noteTitle:      noteTitleTextField.text!,
-                        notes:          notesText.text!,
-                        amount:         noteTextAmountView.text!,
-                        noteType:       noteTextTypeView.text!,
-                        actualDate:     noteActualDate.date,
-                        recurring:      true,
-                        paid:           true)
+                        noteId:        changingReallySimpleNote.noteId,
+                        noteTitle:     changingReallySimpleNote.noteTitle,
+                        notes:         changingReallySimpleNote.notes,
+                        amount:        changingReallySimpleNote.amount,
+                        noteType:      changingReallySimpleNote.noteType,
+                        actualDate:    changingReallySimpleNote.actualDate,
+                        recurring:     changingReallySimpleNote.recurring,
+                        paid:          true)
                     
                 )
                 
@@ -289,7 +311,7 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                 // show alert
                 self.present(alert, animated: true)
             }
-                        
+        
            completionHandler()
         }
         

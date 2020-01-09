@@ -37,6 +37,7 @@
 		0FC714CF23AD98EB00CBF084 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC714CE23AD98EB00CBF084 /* MainViewController.swift */; };
 		0FC714D323AD9E2400CBF084 /* UpcomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC714D123AD9E2300CBF084 /* UpcomingViewCell.swift */; };
 		0FC714D423AD9E2400CBF084 /* UpcomingViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */; };
+		0FF59EFF23C691AB005E25FC /* SimpleNotePaid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF59EFE23C691AB005E25FC /* SimpleNotePaid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		0FC714CE23AD98EB00CBF084 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0FC714D123AD9E2300CBF084 /* UpcomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewCell.swift; sourceTree = "<group>"; };
 		0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpcomingViewCell.xib; sourceTree = "<group>"; };
+		0FF59EFE23C691AB005E25FC /* SimpleNotePaid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNotePaid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				0F32F2E1235E214E00A438D2 /* SimpleNote.swift */,
+				0FF59EFE23C691AB005E25FC /* SimpleNotePaid.swift */,
 			);
 			path = Note;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				0F32F2C6235AAB6100A438D2 /* AppDelegate.swift in Sources */,
 				0F32F2C8235AAB6100A438D2 /* SceneDelegate.swift in Sources */,
 				0FA943662365193D002EBB52 /* HomeCollectionViewController.swift in Sources */,
+				0FF59EFF23C691AB005E25FC /* SimpleNotePaid.swift in Sources */,
 				0FC714D323AD9E2400CBF084 /* UpcomingViewCell.swift in Sources */,
 				0F32F2DD235E1C9400A438D2 /* NoteCoreDataHelper.swift in Sources */,
 				0F2F1971235E47CC003CB9F3 /* NoteTableViewCell.swift in Sources */,
@@ -480,7 +484,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -501,7 +505,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

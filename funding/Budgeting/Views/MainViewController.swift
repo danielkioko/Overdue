@@ -14,6 +14,10 @@ let billDueCellID = "billDueCell"
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var leCollectionView: UICollectionView!
+    let shapeLayer = CAShapeLayer()
+    @IBOutlet var graphContainer: UIView!
+    
+    var previewController: PreviewController? = nil
     
     @IBOutlet var headerLayer: UIView!
     @IBOutlet var addBillLayer: UIView!
@@ -60,6 +64,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         leCollectionView.reloadData()
         calculateTotal()
         
+        if let split = splitViewController {
+            let controllers = split.viewControllers
+            previewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? PreviewController
+        }
+        
+        //loadPieChart()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -87,11 +98,39 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let object = NoteStorage.storage.readNote(at: indexPath.row)
         let controller = PreviewController()
         controller.detailItem = object
-        self.present(controller, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "preview", sender: nil)
     }
     
-    func toMaster() {
-        self.performSegue(withIdentifier: "masterSegue", sender: nil)
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil){ action in
+            
+            let viewMenu = UIAction(title: "View", image: UIImage(systemName: "eye.fill"), identifier: UIAction.Identifier(rawValue: "view")) {_ in
+                print("button clicked..")
+            }
+            
+            let rotate = UIAction(title: "Rotate", image: UIImage(systemName: "arrow.counterclockwise"), identifier: nil, state: .on, handler: {action in
+                print("rotate clicked.")
+            })
+            
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, state: .on, handler: {action in
+                
+                print("delete clicked.")
+            })
+            
+            let editMenu = UIMenu(title: "Edit...", children: [rotate, delete])
+            
+            
+            return UIMenu(title: "Options", image: nil, identifier: nil, children: [viewMenu, editMenu])
+        }
+        
+        return configuration
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        leCollectionView.reloadData()
+        calculateTotal()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -120,15 +159,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 
                 i += 1
                 
-            }
-            
+        }
+        
         while (j <= NoteStorage.storage.count()) {
             total = amounts.reduce(0, +)
             j += 1
         }
         
-        totalLabel.text = String(total).currencyFormatting()
-        remainingLabel.text = (String(budgetedAmount ?? 0 - total).currencyFormatting()) + " remaining"
+        if total == 0 {
+            totalLabel.text = String(total).currencyFormatting()
+            remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
+        } else {
+            totalLabel.text = String(total).currencyFormatting()
+            remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
+        }
         
         if (total == 0) {
             upcomingText.isHidden = true
@@ -136,15 +180,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             upcomingText.isHidden = false
         }
         
-//        let percentage = ((500000 - total) * 100) / total
-//        updateBarChart(prc: percentage)
-        
     }
     
-    func updateBarChart(prc: Int) {
-                
-    }
-
     func countOnlyUpcomingBills() -> Int {
         
         var count = 0
@@ -164,6 +201,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         print(count)
         return count
         
+    }
+    
+    @IBAction func doneBtn(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func customize() {
@@ -193,6 +234,39 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.tabBarController?.tabBar.backgroundImage = UIImage()
         self.tabBarController?.tabBar.clipsToBounds = true
         
+    }
+    
+    func loadPieChart() {
+        
+        let center = graphContainer.center
+        let trackLayer = CAShapeLayer()
+        let circularPath = UIBezierPath(arcCenter: center, radius: 50, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        
+        trackLayer.path = circularPath.cgPath
+        trackLayer.strokeColor = UIColor.lightGray.cgColor
+        trackLayer.lineWidth = 15
+        trackLayer.fillColor = UIColor.clear.cgColor
+        trackLayer.lineCap = CAShapeLayerLineCap.round
+        headerLayer.layer.addSublayer(trackLayer)
+                
+        shapeLayer.path = circularPath.cgPath
+        shapeLayer.strokeColor = UIColor.red.cgColor
+        shapeLayer.lineWidth = 15
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.strokeEnd = 0
+        
+        runFill()
+        
+    }
+    
+    func runFill() {
+        let basicAnim = CABasicAnimation(keyPath: "strokeEnd")
+        basicAnim.toValue = 1
+        basicAnim.duration = 2
+        basicAnim.fillMode = CAMediaTimingFillMode.forwards
+        basicAnim.isRemovedOnCompletion = false
+        shapeLayer.add(basicAnim, forKey: "urSoBasic")
     }
     
 }

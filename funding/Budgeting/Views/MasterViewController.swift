@@ -214,6 +214,27 @@ class MasterViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil){ action in
+            let viewMenu = UIAction(title: "View", image: UIImage(systemName: "eye.fill"), identifier: UIAction.Identifier(rawValue: "view")) {_ in
+                print("button clicked..")
+            }
+            let rotate = UIAction(title: "Rotate", image: UIImage(systemName: "arrow.counterclockwise"), identifier: nil, state: .on, handler: {action in
+                print("rotate clicked.")
+            })
+            let delete = UIAction(title: "Delete", image: UIImage(systemName: "trash.fill"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, state: .on, handler: {action in
+                
+                print("delete clicked.")
+            })
+            let editMenu = UIMenu(title: "Edit...", children: [rotate, delete])
+            
+            
+            return UIMenu(title: "Options", image: nil, identifier: nil, children: [viewMenu, editMenu])
+        }
+        
+        return configuration
+    }
+    
 }
 
 func calculateDaysBetweenTwoDates(start: Date, end: Date) -> Int {
