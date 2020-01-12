@@ -26,7 +26,7 @@ class MasterViewController: UITableViewController {
         
         tableuxView.delegate = self
         tableuxView.dataSource = self
-        
+        tableuxView.tableFooterView = UIView()
         tableuxView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         customize()
@@ -151,13 +151,8 @@ class MasterViewController: UITableViewController {
             }
             
         }
-        
-        cell.cellView.layer.cornerRadius = 10
+        cell.selectionStyle = .none
         cell.cellBar.layer.cornerRadius = 10
-        cell.cellView.layer.shadowColor = UIColor.black.cgColor
-        cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        cell.cellView.layer.shadowOpacity = 0.2
-        cell.cellView.layer.shadowRadius = 4.0
         
         return cell
     }

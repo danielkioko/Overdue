@@ -51,11 +51,7 @@ class SettingsViewController: UIViewController {
         defaults.setValue(budgetField.text, forKey: budgetConst)
         defaults.setValue(timePicker.date.toDateString(dateFormat: "HH:mm"), forKey: timeConst)
         defaults.setValue(touchIDSwitch.isOn, forKey: touchIDConst)
-        
-        let vc = MainViewController()
-        vc.calculateTotal()
-        vc.leCollectionView.reloadData()
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func customize() {

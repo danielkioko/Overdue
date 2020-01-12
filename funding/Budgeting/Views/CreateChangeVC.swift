@@ -93,13 +93,15 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             if self.changingReallySimpleNote != nil {
                 // change mode - change the item
                 changeItem()
+                self.dismiss(animated: true, completion: nil)
             } else {
                 // create mode - create the item
                 addItem()
                 addNotification()
+                self.dismiss(animated: true, completion: nil)
             }
         }
-                
+        
     }
     
     func setChangingReallySimpleNote(changingReallySimpleNote : SimpleNote) {

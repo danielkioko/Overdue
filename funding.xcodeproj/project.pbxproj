@@ -27,9 +27,9 @@
 		0F516A1023A18C8E00804435 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F516A0F23A18C8E00804435 /* SettingsViewController.swift */; };
 		0F6A51DE2375144C0049C2C9 /* MVExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6A51DD2375144C0049C2C9 /* MVExtension.swift */; };
 		0F768455236F645300DB878D /* CreateChangeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F768454236F645300DB878D /* CreateChangeExtension.swift */; };
-		0F7D257723BF0DC2009EDF08 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7D257623BF0DC2009EDF08 /* PreviewController.swift */; };
 		0F7D257A23BF14CA009EDF08 /* ShowAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7D257823BF14CA009EDF08 /* ShowAllCell.swift */; };
 		0F7D257B23BF14CA009EDF08 /* ShowAllCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F7D257923BF14CA009EDF08 /* ShowAllCell.xib */; };
+		0F84D39723CA942E007BDD80 /* UpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F84D39623CA942E007BDD80 /* UpcomingCell.swift */; };
 		0F8777CD236C8B9000788D06 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8777CC236C8B9000788D06 /* TestViewController.swift */; };
 		0F8874702378C3FA006F2123 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F88746F2378C3FA006F2123 /* CloudKit.framework */; };
 		0F9CE9092360AB41002CAA26 /* DetailExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9CE9082360AB41002CAA26 /* DetailExtension.swift */; };
@@ -63,9 +63,9 @@
 		0F516A0F23A18C8E00804435 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0F6A51DD2375144C0049C2C9 /* MVExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVExtension.swift; sourceTree = "<group>"; };
 		0F768454236F645300DB878D /* CreateChangeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChangeExtension.swift; sourceTree = "<group>"; };
-		0F7D257623BF0DC2009EDF08 /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
 		0F7D257823BF14CA009EDF08 /* ShowAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllCell.swift; sourceTree = "<group>"; };
 		0F7D257923BF14CA009EDF08 /* ShowAllCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowAllCell.xib; sourceTree = "<group>"; };
+		0F84D39623CA942E007BDD80 /* UpcomingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingCell.swift; sourceTree = "<group>"; };
 		0F8777CC236C8B9000788D06 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		0F88746D2378C388006F2123 /* funding.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = funding.entitlements; sourceTree = "<group>"; };
 		0F88746F2378C3FA006F2123 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -202,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				0FC714CE23AD98EB00CBF084 /* MainViewController.swift */,
-				0F7D257623BF0DC2009EDF08 /* PreviewController.swift */,
 				0F32F2C9235AAB6100A438D2 /* MasterViewController.swift */,
 				0F32F2CB235AAB6100A438D2 /* DetailViewController.swift */,
 				0F2F1972235E4D92003CB9F3 /* CreateChangeVC.swift */,
@@ -221,6 +220,7 @@
 				0FC714D223AD9E2300CBF084 /* UpcomingViewCell.xib */,
 				0F7D257823BF14CA009EDF08 /* ShowAllCell.swift */,
 				0F7D257923BF14CA009EDF08 /* ShowAllCell.xib */,
+				0F84D39623CA942E007BDD80 /* UpcomingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -301,7 +301,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F7D257723BF0DC2009EDF08 /* PreviewController.swift in Sources */,
 				0F8777CD236C8B9000788D06 /* TestViewController.swift in Sources */,
 				0FC714CF23AD98EB00CBF084 /* MainViewController.swift in Sources */,
 				0F9CE9092360AB41002CAA26 /* DetailExtension.swift in Sources */,
@@ -312,6 +311,7 @@
 				0F32F2C8235AAB6100A438D2 /* SceneDelegate.swift in Sources */,
 				0FA943662365193D002EBB52 /* HomeCollectionViewController.swift in Sources */,
 				0FF59EFF23C691AB005E25FC /* SimpleNotePaid.swift in Sources */,
+				0F84D39723CA942E007BDD80 /* UpcomingCell.swift in Sources */,
 				0FC714D323AD9E2400CBF084 /* UpcomingViewCell.swift in Sources */,
 				0F32F2DD235E1C9400A438D2 /* NoteCoreDataHelper.swift in Sources */,
 				0F2F1971235E47CC003CB9F3 /* NoteTableViewCell.swift in Sources */,

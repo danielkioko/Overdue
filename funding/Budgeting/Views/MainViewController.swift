@@ -16,9 +16,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var leCollectionView: UICollectionView!
     let shapeLayer = CAShapeLayer()
     @IBOutlet var graphContainer: UIView!
-    
-    var previewController: PreviewController? = nil
-    
+        
     @IBOutlet var headerLayer: UIView!
     @IBOutlet var addBillLayer: UIView!
     @IBOutlet var preferencesLayer:UIView!
@@ -58,18 +56,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let context = appDelegate.persistentContainer.viewContext
         NoteStorage.storage.setManagedContext(managedObjectContext: context)
         
-        let cell = UINib(nibName: "UpcomingViewCell", bundle: nil)
-        leCollectionView.register(cell, forCellWithReuseIdentifier: billDueCellID)
-        
         leCollectionView.reloadData()
         calculateTotal()
-        
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            previewController = (controllers[controllers.count - 1] as! UINavigationController).topViewController as? PreviewController
-        }
-        
-        //loadPieChart()
         
     }
     
@@ -78,7 +66,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "billDueCell", for: indexPath) as! UpcomingViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ubCell", for: indexPath) as! UpcomingCell
     
         let object = NoteStorage.storage.readNote(at: indexPath.row)
         
@@ -90,15 +78,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.billDueDate.text = "Due on " + (dueDate?.toString(dateFormat: "MM-dd"))!
             
         }
-    
+
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let object = NoteStorage.storage.readNote(at: indexPath.row)
-        let controller = PreviewController()
-        controller.detailItem = object
-        self.performSegue(withIdentifier: "preview", sender: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -130,13 +111,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidAppear(_ animated: Bool) {
         leCollectionView.reloadData()
-        calculateTotal()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         leCollectionView.reloadData()
-        calculateTotal()
     }
     
     func calculateTotal() {
@@ -166,13 +145,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             j += 1
         }
         
-        if total == 0 {
-            totalLabel.text = String(total).currencyFormatting()
-            remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
-        } else {
-            totalLabel.text = String(total).currencyFormatting()
-            remainingLabel.text = (String(budgetedAmount! - total).currencyFormatting()) + " remaining"
-        }
+        totalLabel.text = String(total).currencyFormatting()
+        remainingLabel.text = (String(budgetedAmount!  - total).currencyFormatting()) + " remaining"
         
         if (total == 0) {
             upcomingText.isHidden = true
