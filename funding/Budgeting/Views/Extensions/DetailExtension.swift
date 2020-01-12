@@ -80,9 +80,20 @@ extension DetailViewController {
         
     }
     
-    func customizeButtons() {
-        ebLayer.layer.backgroundColor = #colorLiteral(red: 0.1568627451, green: 0.2078431373, blue: 0.3490196078, alpha: 1)
-        ebLayer.layer.cornerRadius = 0
+    func customize() {
+        
+        editBtn.layer.cornerRadius = 10
+        editBtn.layer.shadowColor = UIColor.black.cgColor
+        editBtn.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        editBtn.layer.shadowOpacity = 0.2
+        editBtn.layer.shadowRadius = 4.0
+        
+        cardView.layer.cornerRadius = 20
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        cardView.layer.shadowOpacity = 0.2
+        cardView.layer.shadowRadius = 4.0
+        
     }
     
     @objc

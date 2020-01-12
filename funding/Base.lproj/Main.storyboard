@@ -41,42 +41,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5J-mo-BTd">
-                                <rect key="frame" x="20" y="730" width="374" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBY-KZ-hhi">
-                                <rect key="frame" x="37" y="586" width="300" height="45"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVR-nw-VvS">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="jOU-Pc-0QN"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="15"/>
-                                        <state key="normal" title="Edit">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="VPA-qb-Hy6" kind="show" identifier="showChangeNoteSegue" id="H3c-sK-Waq"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="yVR-nw-VvS" secondAttribute="trailing" id="5nx-rS-0UO"/>
-                                    <constraint firstAttribute="height" constant="45" id="Cpe-KI-rY2"/>
-                                    <constraint firstItem="yVR-nw-VvS" firstAttribute="leading" secondItem="NBY-KZ-hhi" secondAttribute="leading" id="O9o-Vd-nNO"/>
-                                    <constraint firstItem="yVR-nw-VvS" firstAttribute="top" secondItem="NBY-KZ-hhi" secondAttribute="top" id="bRt-ZX-I49"/>
-                                    <constraint firstAttribute="bottom" secondItem="yVR-nw-VvS" secondAttribute="bottom" id="doG-Mg-Q8T"/>
-                                    <constraint firstAttribute="width" constant="300" id="xh1-ID-8Ss"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRK-um-5Tn">
-                                <rect key="frame" x="20" y="136" width="331" height="337.5"/>
+                                <rect key="frame" x="22" y="106" width="331" height="337.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGP-xr-oNc">
                                         <rect key="frame" x="8" y="94" width="315" height="31.5"/>
@@ -125,6 +91,7 @@
                                     <constraint firstAttribute="trailing" secondItem="DUm-Oy-Or7" secondAttribute="trailing" constant="8" id="CnO-W4-joA"/>
                                     <constraint firstItem="lxm-Ju-84y" firstAttribute="top" secondItem="DRc-Bk-20v" secondAttribute="bottom" constant="32" id="IfK-IV-9Dd"/>
                                     <constraint firstItem="DRc-Bk-20v" firstAttribute="top" secondItem="Cne-nw-18X" secondAttribute="bottom" constant="8" id="OhP-b2-Jdn"/>
+                                    <constraint firstAttribute="height" constant="337.5" id="SDM-qP-rdI"/>
                                     <constraint firstAttribute="trailing" secondItem="DRc-Bk-20v" secondAttribute="trailing" constant="8" id="TZp-Dy-lf8"/>
                                     <constraint firstItem="2ZN-iD-tIr" firstAttribute="top" secondItem="PRK-um-5Tn" secondAttribute="top" constant="21" id="VVY-nA-pOw"/>
                                     <constraint firstAttribute="trailing" secondItem="lxm-Ju-84y" secondAttribute="trailing" constant="8" id="WFp-gy-btN"/>
@@ -140,16 +107,37 @@
                                     <constraint firstItem="lxm-Ju-84y" firstAttribute="leading" secondItem="PRK-um-5Tn" secondAttribute="leading" constant="8" id="vz6-Mo-Its"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5J-mo-BTd">
+                                <rect key="frame" x="20" y="730" width="374" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVR-nw-VvS">
+                                <rect key="frame" x="37" y="590" width="300" height="45"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="aOu-sr-vFD"/>
+                                    <constraint firstAttribute="width" constant="300" id="jOU-Pc-0QN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="15"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="VPA-qb-Hy6" kind="show" identifier="showChangeNoteSegue" id="H3c-sK-Waq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="PRK-um-5Tn" secondAttribute="trailing" constant="24" id="AaH-75-hsb"/>
-                            <constraint firstItem="yVR-nw-VvS" firstAttribute="top" secondItem="PRK-um-5Tn" secondAttribute="bottom" constant="112.5" id="Rea-x7-K6g"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="NBY-KZ-hhi" secondAttribute="trailing" constant="38" id="TYn-Sb-T8l"/>
-                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="NBY-KZ-hhi" secondAttribute="bottom" constant="16" id="Xe1-Ys-wgj"/>
-                            <constraint firstItem="PRK-um-5Tn" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="80" id="ogz-ED-LHg"/>
-                            <constraint firstItem="NBY-KZ-hhi" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="37" id="vQx-NP-vrU"/>
-                            <constraint firstItem="PRK-um-5Tn" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="20" id="wd4-NF-Ogc"/>
+                            <constraint firstItem="PRK-um-5Tn" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="22" id="3JS-gs-EX7"/>
+                            <constraint firstItem="PRK-um-5Tn" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" constant="50" id="9Iw-v5-Aer"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="yVR-nw-VvS" secondAttribute="bottom" constant="12" id="WmM-wh-A8x"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="yVR-nw-VvS" secondAttribute="trailing" constant="38" id="Zgz-2v-p0S"/>
+                            <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="PRK-um-5Tn" secondAttribute="trailing" constant="22" id="ky0-od-vIV"/>
+                            <constraint firstItem="yVR-nw-VvS" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" constant="37" id="wJo-i2-wkf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VUw-jc-0yf"/>
                     </view>
@@ -158,7 +146,6 @@
                     <connections>
                         <outlet property="cardView" destination="PRK-um-5Tn" id="ofI-61-fVj"/>
                         <outlet property="categoryCount" destination="DUm-Oy-Or7" id="iJ1-4H-c1W"/>
-                        <outlet property="ebLayer" destination="NBY-KZ-hhi" id="5cC-UP-tRm"/>
                         <outlet property="editBtn" destination="yVR-nw-VvS" id="EDb-Xg-8aA"/>
                         <outlet property="labelToDueDate" destination="lxm-Ju-84y" id="RP7-49-NVj"/>
                         <outlet property="noteAmountView" destination="Cne-nw-18X" id="pMI-UI-7fn"/>
@@ -975,6 +962,7 @@
                                         </connections>
                                     </collectionView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="YQp-SL-WF4" firstAttribute="leading" secondItem="KrQ-UP-h3S" secondAttribute="leading" constant="20" id="339-p1-QSe"/>
                                     <constraint firstItem="lUg-Gr-Zo9" firstAttribute="top" secondItem="MFv-3O-Ldk" secondAttribute="bottom" constant="18" id="4jG-rg-3Bq"/>
