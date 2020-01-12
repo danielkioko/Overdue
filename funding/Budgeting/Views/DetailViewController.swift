@@ -23,6 +23,16 @@ class DetailViewController: UIViewController {
     
     let shapeLayer = CAShapeLayer()
     
+    func fillData() {
+        if detailItem != nil {
+            let detail = detailItem
+            noteTitleLabel.text = detail!.noteTitle
+            noteAmountView.text = detail!.amount.currencyFormatting()
+            noteTypeView.text = detail!.noteType
+            noteDateLabel.text = detail!.actualDate.toString()
+        }
+    }
+    
     func configureView() {
        if let detail = detailItem {
         
@@ -59,11 +69,12 @@ class DetailViewController: UIViewController {
        super.viewDidLoad()
        // Do any additional setup after loading the view, typically from a nib.
     self.navigationController?.title = ""
-    customizeButtons()
-    loadCardView()
-    configureView()
-    daysToDueDate()
-    countItemsInCategory()
+//    customizeButtons()
+//    loadCardView()
+//    daysToDueDate()
+//    countItemsInCategory()
+//    configureView()
+    fillData()
    }
 
    var detailItem: SimpleNote? {

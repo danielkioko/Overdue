@@ -127,12 +127,10 @@ extension CreateChange {
 
 extension Date {
 
-    func toString(withFormat format: String = "EEEE ، d MMMM yyyy") -> String {
+    func toString(withFormat format: String = "EEEE, d MMMM yyyy") -> String {
 
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "fa-IR")
-        dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")
-        dateFormatter.calendar = Calendar(identifier: .persian)
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
         dateFormatter.dateFormat = format
         let str = dateFormatter.string(from: self)
 

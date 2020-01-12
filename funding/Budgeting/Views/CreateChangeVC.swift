@@ -39,6 +39,10 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        customize()
+        selectType()
+        enableCloseKeyboard()
+        
         doneButton.layer.cornerRadius = 20
         doneButton.layer.shadowColor = UIColor.black.cgColor
         doneButton.layer.shadowOffset = CGSize(width: 0, height: 5.0)
@@ -48,19 +52,14 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         gradientLayer.frame = self.view.bounds
         self.view.layer.addSublayer(gradientLayer)
         
-        customize()
-        
-        if (detailsToFill != nil) {
-            noteTitleTextField.text = detailsToFill?.noteTitle
-            noteTextTypeView.text = detailsToFill?.noteType
-            noteActualDate.date = detailsToFill!.actualDate
-            noteTextAmountView.text = detailsToFill?.amount.currencyFormatting()
-            notesText.text = detailsToFill?.notes
-            reOccurringToggle.isOn = detailsToFill!.recurring
+        if (changingReallySimpleNote != nil) {
+            noteTitleTextField.text = changingReallySimpleNote!.noteTitle
+            noteTextTypeView.text = changingReallySimpleNote!.noteType
+            noteActualDate.date = changingReallySimpleNote!.actualDate
+            noteTextAmountView.text = changingReallySimpleNote!.amount
+            notesText.text = changingReallySimpleNote!.notes
+            reOccurringToggle.isOn = changingReallySimpleNote!.recurring
         }
-        
-        selectType()
-        enableCloseKeyboard()
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -71,6 +70,10 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         return 1
     }
         
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        noteTextTypeView.text = typeItems[row]
+    }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return typeItems.count
     }
