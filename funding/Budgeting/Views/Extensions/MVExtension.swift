@@ -57,7 +57,7 @@ extension MasterViewController {
             total = amounts.reduce(0, +)
             j += 1
         }
-                
+            
     }
     
     func getCurrentMonthItems(date: Date) -> Date {

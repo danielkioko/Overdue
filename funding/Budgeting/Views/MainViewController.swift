@@ -15,15 +15,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet var leCollectionView: UICollectionView!
     let shapeLayer = CAShapeLayer()
-    @IBOutlet var graphContainer: UIView!
         
     @IBOutlet var headerLayer: UIView!
     @IBOutlet var addBillLayer: UIView!
     @IBOutlet var preferencesLayer:UIView!
     @IBOutlet var upcomingText: UILabel!
-    
-    @IBOutlet var barOuterLayer: UIView!
-    @IBOutlet var barInnerLayer: UIView!
+    @IBOutlet var progressBar: UIProgressView!
     
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var totalLabel: UILabel!
@@ -209,38 +206,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.tabBarController?.tabBar.clipsToBounds = true
         
     }
-    
-    func loadPieChart() {
-        
-        let center = graphContainer.center
-        let trackLayer = CAShapeLayer()
-        let circularPath = UIBezierPath(arcCenter: center, radius: 50, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
-        
-        trackLayer.path = circularPath.cgPath
-        trackLayer.strokeColor = UIColor.lightGray.cgColor
-        trackLayer.lineWidth = 15
-        trackLayer.fillColor = UIColor.clear.cgColor
-        trackLayer.lineCap = CAShapeLayerLineCap.round
-        headerLayer.layer.addSublayer(trackLayer)
-                
-        shapeLayer.path = circularPath.cgPath
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        shapeLayer.lineWidth = 15
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.lineCap = CAShapeLayerLineCap.round
-        shapeLayer.strokeEnd = 0
-        
-        runFill()
-        
-    }
-    
-    func runFill() {
-        let basicAnim = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnim.toValue = 1
-        basicAnim.duration = 2
-        basicAnim.fillMode = CAMediaTimingFillMode.forwards
-        basicAnim.isRemovedOnCompletion = false
-        shapeLayer.add(basicAnim, forKey: "urSoBasic")
-    }
+
     
 }
