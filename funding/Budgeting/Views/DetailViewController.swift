@@ -12,14 +12,11 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var noteTitleLabel: UILabel!
     @IBOutlet weak var noteAmountView: UILabel!
-    @IBOutlet weak var noteTypeView: UILabel!
     @IBOutlet weak var noteDateLabel: UILabel!
     @IBOutlet weak var notesText: UITextView!
     @IBOutlet weak var labelToDueDate: UILabel!
-    @IBOutlet weak var categoryCount: UILabel!
     @IBOutlet weak var cardView: UIView!
     @IBOutlet var editBtn: UIButton!
-    @IBOutlet var ebLayer: UIView!
     
     let shapeLayer = CAShapeLayer()
     
@@ -28,7 +25,6 @@ class DetailViewController: UIViewController {
             let detail = detailItem
             noteTitleLabel.text = detail!.noteTitle
             noteAmountView.text = detail!.amount.currencyFormatting()
-            noteTypeView.text = detail!.noteType
             noteDateLabel.text = detail!.actualDate.toString()
         }
     }
@@ -38,11 +34,9 @@ class DetailViewController: UIViewController {
         
            if let topicLabel = noteTitleLabel,
               let dateLabel = noteDateLabel,
-              let typeLabel = noteTypeView,
               let notesView = notesText,
               let textView = noteAmountView {
                topicLabel.text = detail.noteTitle
-            typeLabel.text = detail.noteType
             textView.text = detail.amount.currencyFormatting()
             notesView.text = detail.notes
             
@@ -61,7 +55,6 @@ class DetailViewController: UIViewController {
     self.navigationController?.title = ""
     customize()
     daysToDueDate()
-    countItemsInCategory()
     fillData()
    }
 

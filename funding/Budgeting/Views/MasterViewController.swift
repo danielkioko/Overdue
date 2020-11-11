@@ -14,10 +14,18 @@ class MasterViewController: UITableViewController {
     var detailViewController: DetailViewController? = nil
     
     @IBOutlet var tableuxView: UITableView!
+    @IBOutlet var headerCell: UIView!
+    
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var totalLabel: UILabel!
+    @IBOutlet var remainingLabel: UILabel!
+    @IBOutlet var remainingText: UILabel!
+    
+    @IBOutlet var addBtn: UIButton!
+    @IBOutlet var settingsBtn: UIButton!
     
     var objects = [Any]()
     @IBOutlet var selector: UISegmentedControl!
-    @IBOutlet var topView: UIView!
     
     var segmentIndex:Int = 0
         
@@ -26,8 +34,14 @@ class MasterViewController: UITableViewController {
         
         tableuxView.delegate = self
         tableuxView.dataSource = self
-        tableuxView.tableFooterView = UIView()
         tableuxView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        tableuxView.tableFooterView = UIView()
+        
+        headerCell.layer.cornerRadius = 20
+        headerCell.layer.shadowColor = UIColor.black.cgColor
+        headerCell.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        headerCell.layer.shadowOpacity = 0.2
+        headerCell.layer.shadowRadius = 4.0
         
         customize()
         
@@ -53,22 +67,8 @@ class MasterViewController: UITableViewController {
             return
         }
         
-        // As we know that container is set up in the AppDelegates so we need to refer that container.
-        // We need to create a context from this container
         let managedContext = appDelegate.persistentContainer.viewContext
-        
-        // set context in the storage
         NoteStorage.storage.setManagedContext(managedObjectContext: managedContext)
-        
-        // Do any additional setup after loading the view, typically from a nib.
-        //navigationItem.leftBarButtonItem = editButtonItem
-        
-//        let addItemBtnImage = UIImage(named: "new")
-//        let addItemBtn = UIBarButtonItem()
-//        addItemBtn.setBackgroundImage(addItemBtnImage, for: UIControl.State.normal, barMetrics: UIBarMetrics(rawValue: 0)!)
-//
-//        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-//        navigationItem.rightBarButtonItem = addButton
         
         if let split = splitViewController {
             let controllers = split.viewControllers
@@ -76,33 +76,7 @@ class MasterViewController: UITableViewController {
         }
             
     }
-    
-    @IBAction func indexControl(_ sender: Any) {
-        if selector.selectedSegmentIndex == 0 {
-            segmentIndex = 0
-            tableView.reloadData()
-        } else if selector.selectedSegmentIndex == 1 {
-            segmentIndex = 1
-            tableView.reloadData()
-        } else if selector.selectedSegmentIndex == 2 {
-            segmentIndex = 2
-            tableView.reloadData()
-        }
-    }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
-//        super.viewWillAppear(animated)
-//    }
-
-//    @objc
-//    func insertNewObject(_ sender: Any) {
-//        objects.insert(NSDate(), at: 0)
-//        performSegue(withIdentifier: "showCreateNoteSegue", sender: self)
-//    }
-
-    // MARK: - Segues
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -115,8 +89,6 @@ class MasterViewController: UITableViewController {
             }
         }
     }
-
-    // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -136,7 +108,7 @@ class MasterViewController: UITableViewController {
             
             let result = calculateDaysBetweenTwoDates(start: Date(), end: object.actualDate)
             
-            if (result == 0) {
+            if (result == 0) {                
                 cell.noteAmountLabel!.text = object.amount.currencyFormatting()
                 cell.daysLeftToDueDateLabel!.text = String(result)
             } else if (result == 1) {
@@ -157,6 +129,52 @@ class MasterViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        customize()
+        calculateTotal()
+    }
+    
+    func calculateTotal() {
+    
+        var amounts: [Int] = []
+        var total: Int = 0
+        let budgetAmt = UserDefaults.standard.string(forKey: "budgetConstName")
+        var budgetedAmount: Int = 0
+        if (budgetAmt != nil) {
+            budgetedAmount = Int(budgetAmt ?? "0") ?? 0
+        }
+        
+        var i = 0
+        var j = 0
+        
+        while (i < NoteStorage.storage.count()) {
+                
+                if let object = NoteStorage.storage.readNote(at: i){
+                    if (object.actualDate >= Date()) {
+                        amounts.append(Int(object.amount) ?? 0)
+                    }
+                }
+                
+                i += 1
+                
+        }
+        
+        while (j <= NoteStorage.storage.count()) {
+            total = amounts.reduce(0, +)
+            j += 1
+        }
+        
+        totalLabel.text = String(total).currencyFormatting()
+        if (budgetedAmount == 0) {
+            remainingLabel.text = "Set a budget to get started"
+            remainingText.isHidden = true
+        } else {
+            remainingLabel.text = (String(budgetedAmount  - total).currencyFormatting())
+            remainingText.isHidden = false
+        }
+        
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         var height: CGFloat = 110.0
@@ -169,16 +187,7 @@ class MasterViewController: UITableViewController {
                     tableView.cellForRow(at: indexPath)?.isHidden = true
                 }
             }
-            
-        } else if (segmentIndex == 2) {
-            
-            if let object = NoteStorage.storage.readNote(at: indexPath.row) {
-                if !(object.actualDate < Date()) {
-                    height = 0.0
-                }
-            }
-            
-        } else if (segmentIndex == 0) {
+        } else {
             height = 110.0
         }
         
@@ -230,6 +239,15 @@ class MasterViewController: UITableViewController {
         return configuration
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if (UserDefaults.standard.string(forKey: "budgetConstName") == "0") {
+            remainingText.isHidden = true
+            remainingLabel.text = "Get started by setting a budget"
+        }
+        calculateTotal()
+    }
+    
 }
 
 func calculateDaysBetweenTwoDates(start: Date, end: Date) -> Int {
@@ -255,8 +273,7 @@ extension Date
 
 }
 
-extension UIView
-{
+extension UIView {
     func addBlurEffect()
     {
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)

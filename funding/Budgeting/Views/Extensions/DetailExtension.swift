@@ -10,36 +10,6 @@ import Foundation
 import UIKit
 
 extension DetailViewController {
-    
-    func countItemsInCategory() {
-        
-        if let detail = detailItem {
-        
-            var p = 0
-            var pCount = 0
-            while (p < NoteStorage.storage.count()) {
-                
-                let item = NoteStorage.storage.readNote(at: p)
-                if (item?.noteType == detail.noteType) {
-                    pCount += 1
-                }
-                
-                p += 1
-                
-            }
-            
-            if (p == 1) {
-                categoryCount.text = "There is " + String(pCount) + " other item in this category"
-            } else if (p > 1) {
-                categoryCount.text = "There is " + String(pCount) + " other items in this category"
-            } else if (p == 0) {
-                categoryCount.text = "No other items in this category"
-            }
-                        
-        }
-
-        
-    }
 
     func calculateDaysBetweenTwoDates(start: Date, end: Date) -> Int {
 

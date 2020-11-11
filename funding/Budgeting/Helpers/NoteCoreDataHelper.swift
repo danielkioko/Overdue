@@ -43,10 +43,6 @@ class NoteCoreDataHelper {
             forKey: "amount")
         
         newNoteToBeCreated.setValue(
-            noteToBeCreated.noteType,
-            forKey: "noteType")
-        
-        newNoteToBeCreated.setValue(
             noteToBeCreated.actualDate,
             forKey: "actualDate")
         
@@ -89,10 +85,6 @@ class NoteCoreDataHelper {
             noteManagedObjectToBeChanged.setValue(
                 noteToBeChanged.amount,
                 forKey: "amount")
-            
-            noteManagedObjectToBeChanged.setValue(
-                noteToBeChanged.noteType,
-                forKey: "noteType")
 
             noteManagedObjectToBeChanged.setValue(
                 noteToBeChanged.actualDate,
@@ -136,7 +128,6 @@ class NoteCoreDataHelper {
                     noteTitle:  noteManagedObjectRead.value(forKey: "noteTitle") as! String,
                     notes:      noteManagedObjectRead.value(forKey: "notes") as! String,
                     amount:     noteManagedObjectRead.value(forKey: "amount") as! String,
-                    noteType:   noteManagedObjectRead.value(forKey: "noteType") as! String,
                     actualDate: noteManagedObjectRead.value(forKey: "actualDate") as! Date,
                     recurring:  noteManagedObjectRead.value(forKey: "recurring") as! Bool,
                     paid:       noteManagedObjectRead.value(forKey: "paid") as! Bool))
@@ -172,7 +163,6 @@ class NoteCoreDataHelper {
                 noteTitle:  noteManagedObjectToBeRead.value(forKey: "noteTitle") as! String,
                 notes:      noteManagedObjectToBeRead.value(forKey: "notes") as! String,
                 amount:     noteManagedObjectToBeRead.value(forKey: "amount") as! String,
-                noteType:   noteManagedObjectToBeRead.value(forKey: "noteType") as! String,
                 actualDate: noteManagedObjectToBeRead.value(forKey: "actualDate") as! Date,
                 recurring:  noteManagedObjectToBeRead.value(forKey: "recurring") as! Bool,
                 paid:       noteManagedObjectToBeRead.value(forKey: "paid") as! Bool)

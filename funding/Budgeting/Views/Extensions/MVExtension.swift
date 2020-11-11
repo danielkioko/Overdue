@@ -29,6 +29,15 @@ extension MasterViewController {
     }
     
     func customize() {
+        
+        if (totalLabel.text == "$0.00") {
+            remainingText.isHidden = true
+            remainingLabel.text = "Get started by setting a budget"
+        }
+        
+        settingsBtn.layer.cornerRadius = 10
+        addBtn.layer.cornerRadius = 10
+        
     }
     
     func calculateTotalForMonth() {

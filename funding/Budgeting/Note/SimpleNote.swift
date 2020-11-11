@@ -15,29 +15,26 @@ class SimpleNote {
     private(set) var noteTitle   : String
     private(set) var amount      : String
     private(set) var notes       : String
-    private(set) var noteType    : String
     private(set) var actualDate  : Date
     private(set) var recurring   : Bool
     private(set) var paid        : Bool
     
     
-    init(noteTitle: String, amount: String, notes: String, noteType: String, actualDate: Date, recurring: Bool, paid: Bool) {
+    init(noteTitle: String, amount: String, notes: String, actualDate: Date, recurring: Bool, paid: Bool) {
         self.noteId =     UUID()
         self.noteTitle =  noteTitle
         self.amount =     amount
         self.notes =      notes
-        self.noteType =   noteType
         self.actualDate = actualDate
         self.recurring = recurring
         self.paid = paid
     }
     
-    init(noteId: UUID, noteTitle: String, notes: String, amount: String, noteType: String, actualDate: Date, recurring: Bool, paid: Bool) {
+    init(noteId: UUID, noteTitle: String, notes: String, amount: String, actualDate: Date, recurring: Bool, paid: Bool) {
       self.noteId =       noteId
       self.noteTitle =    noteTitle
       self.amount =       amount
       self.notes =        notes
-      self.noteType =     noteType
       self.actualDate = actualDate
       self.recurring = recurring
       self.paid = paid

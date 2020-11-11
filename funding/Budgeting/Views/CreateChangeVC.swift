@@ -9,18 +9,20 @@
 import Foundation
 import UIKit
 
-class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class CreateChange: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var noteTitleTextField: UITextField!
     @IBOutlet weak var noteTextAmountView: UITextField!
-    @IBOutlet weak var noteTextTypeView: UITextField!
+    //@IBOutlet weak var noteTextTypeView: UITextField!
     @IBOutlet weak var noteActualDate: UIDatePicker!
     @IBOutlet weak var notesText: UITextView!
+    
     @IBOutlet var notesLayer: UIView!
     @IBOutlet var cardLayer: UIView!
     @IBOutlet var reOccurringToggle: UISwitch!
     
-    @IBOutlet var doneButton: UIView!
+    @IBOutlet var doneButton: UIButton!
+    @IBOutlet var exitButton: UIButton!
     @IBOutlet var datePickerLayer: UIView!
     
     var gradientLayer = CAGradientLayer()
@@ -40,21 +42,25 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         super.viewDidLoad()
         
         customize()
-        selectType()
         enableCloseKeyboard()
         
-        doneButton.layer.cornerRadius = 20
+        doneButton.layer.cornerRadius = 5
         doneButton.layer.shadowColor = UIColor.black.cgColor
         doneButton.layer.shadowOffset = CGSize(width: 0, height: 5.0)
         doneButton.layer.shadowOpacity = 0.2
         doneButton.layer.shadowRadius = 4.0
+        
+        exitButton.layer.cornerRadius = 5
+        exitButton.layer.shadowColor = UIColor.black.cgColor
+        exitButton.layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        exitButton.layer.shadowOpacity = 0.2
+        exitButton.layer.shadowRadius = 4.0
         
         gradientLayer.frame = self.view.bounds
         self.view.layer.addSublayer(gradientLayer)
         
         if (changingReallySimpleNote != nil) {
             noteTitleTextField.text = changingReallySimpleNote!.noteTitle
-            noteTextTypeView.text = changingReallySimpleNote!.noteType
             noteActualDate.date = changingReallySimpleNote!.actualDate
             noteTextAmountView.text = changingReallySimpleNote!.amount
             notesText.text = changingReallySimpleNote!.notes
@@ -65,26 +71,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
     }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-        
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        noteTextTypeView.text = typeItems[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return typeItems.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return typeItems[row]
-    }
-    
-    func selectType() {
-        noteTextTypeView.inputView = typePicker
-     }
     
     @IBAction func doneButtonClicked(_ sender: UIButton, forEvent event: UIEvent) {
         // distinguish change mode and create mode
@@ -105,6 +91,10 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
             }
         }
         
+    }
+    
+    @IBAction func exitButtonClicked(_ sender: UIButton, forEvent event: UIEvent) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setChangingReallySimpleNote(changingReallySimpleNote : SimpleNote) {
@@ -141,13 +131,13 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         content.sound = UNNotificationSound.default
         
         let dateInSettings = UserDefaults.standard.string(forKey: "timeConst")
-        let time = dateInSettings!.toDate(dateFormat: "HH:mm")
+        let time = dateInSettings?.toDate(dateFormat: "HH:mm")
+        
         let calendar = Calendar.current
-        let heure = calendar.component(.hour, from: time)
-        let minuite = calendar.component(.minute, from: time)
+        let heure = calendar.component(.hour, from: time ?? "09".toDate(dateFormat: "HH"))
+        let minuite = calendar.component(.minute, from: time ?? "00".toDate(dateFormat: "mm"))
         
         var dateComponents = DateComponents()
-        
         dateComponents.hour = heure
         dateComponents.minute = minuite
         
@@ -163,35 +153,12 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
         return date!
     }
     
-    private func setAsPaid() -> Void {
-        if let changingReallySimpleNote = self.changingReallySimpleNote {
-            
-            if (detailsToFill != nil) {
-            
-                NoteStorage.storage.changeNote(
-                    noteToBeChanged: SimpleNote(
-                        noteId: changingReallySimpleNote.noteId,
-                        noteTitle: detailsToFill!.noteTitle,
-                        notes: detailsToFill!.amount,
-                        amount: detailsToFill!.notes,
-                        noteType: detailsToFill!.noteType,
-                        actualDate: detailsToFill!.actualDate,
-                        recurring: detailsToFill!.recurring,
-                        paid: true))
-                
-            }
-        } else {
-            //Print Error
-        }
-    }
-    
     private func addItem() -> Void {
 
         let note = SimpleNote(
             noteTitle:  noteTitleTextField.text!,
             amount:     noteTextAmountView.text!,
             notes:      notesText.text!,
-            noteType:   noteTextTypeView.text!,
             actualDate: noteActualDate.date,
             recurring:  reOccurringToggle.isOn,
             paid:       true)
@@ -211,7 +178,6 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                     noteTitle:      noteTitleTextField.text!,
                     notes:          notesText.text!,
                     amount:         noteTextAmountView.text!,
-                    noteType:       noteTextTypeView.text!,
                     actualDate:     noteActualDate.date,
                     recurring:      reOccurringToggle.isOn,
                     paid:           true)
@@ -254,11 +220,9 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
                         noteTitle:     changingReallySimpleNote.noteTitle,
                         notes:         changingReallySimpleNote.notes,
                         amount:        changingReallySimpleNote.amount,
-                        noteType:      changingReallySimpleNote.noteType,
                         actualDate:    changingReallySimpleNote.actualDate,
                         recurring:     changingReallySimpleNote.recurring,
                         paid:          true)
-                    
                 )
                 
 //                addNotification()
@@ -302,6 +266,10 @@ class CreateChange: UIViewController, UITextViewDelegate, UIPickerViewDelegate, 
 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 center.add(request)
+                
+            } else if identifier == "carryForward" {
+                
+                
                 
             } else {
                 // create alert

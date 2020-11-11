@@ -22,7 +22,6 @@ extension CreateChange {
         toolbar.setItems([flexSpace, doneBtn], animated: false)
         toolbar.sizeToFit()
         
-        noteTextTypeView.inputAccessoryView = toolbar
         noteTextAmountView.inputAccessoryView = toolbar
         noteTitleTextField.inputAccessoryView = toolbar
         
@@ -43,12 +42,10 @@ extension CreateChange {
         
            if let topicLabel = noteTitleTextField,
               let datePicker = noteActualDate,
-              let typeLabel = noteTextTypeView,
               let notesView = notesText,
               let textView = noteTextAmountView,
               let toggle = reOccurringToggle {
                topicLabel.text = detail.noteTitle
-            typeLabel.text = detail.noteType
             datePicker.date = detail.actualDate
             textView.text = detail.amount.currencyFormatting()
             notesView.text = detail.notes
@@ -56,6 +53,73 @@ extension CreateChange {
                 
            }
        }
+    }
+    
+    func forwardReminderDate(date: Date) -> Date {
+        let dateLater = Calendar.current.date(byAdding: .month, value: 1, to: date)
+        return dateLater ?? Date()
+    }
+    
+    func setAsPaid() -> Void {
+        if let changingReallySimpleNote = self.changingReallySimpleNote {
+            
+            if (detailsToFill != nil) {
+            
+                NoteStorage.storage.changeNote(
+                    noteToBeChanged: SimpleNote(
+                        noteId: changingReallySimpleNote.noteId,
+                        noteTitle: detailsToFill!.noteTitle,
+                        notes: detailsToFill!.amount,
+                        amount: detailsToFill!.notes,
+                        actualDate: detailsToFill!.actualDate,
+                        recurring: detailsToFill!.recurring,
+                        paid: true))
+                
+            }
+        } else {
+            // create alert
+            let alert = UIAlertController(
+                title: "Unexpected error",
+                message: "Cannot change the note, unexpected error occurred. Try again later.",
+                preferredStyle: .alert)
+            
+            // add OK action
+            alert.addAction(UIAlertAction(title: "OK", style: .default ) { (_) in self.performSegue(withIdentifier: "backToMenu",
+                                              sender: self)})
+            // show alert
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func setToCarryForward() {
+        if let changingReallySimpleNote = self.changingReallySimpleNote {
+            
+            if (detailsToFill != nil) {
+            
+                NoteStorage.storage.changeNote(
+                    noteToBeChanged: SimpleNote(
+                        noteId: changingReallySimpleNote.noteId,
+                        noteTitle: detailsToFill!.noteTitle,
+                        notes: detailsToFill!.amount,
+                        amount: detailsToFill!.notes,
+                        actualDate: forwardReminderDate(date: detailsToFill!.actualDate),
+                        recurring: true,
+                        paid: true))
+                
+            }
+        } else {
+            // create alert
+            let alert = UIAlertController(
+                title: "Unexpected error",
+                message: "Cannot change the note, unexpected error occurred. Try again later.",
+                preferredStyle: .alert)
+            
+            // add OK action
+            alert.addAction(UIAlertAction(title: "OK", style: .default ) { (_) in self.performSegue(withIdentifier: "backToMenu",
+                                              sender: self)})
+            // show alert
+            self.present(alert, animated: true)
+        }
     }
     
     func customize() {
@@ -79,11 +143,9 @@ extension CreateChange {
         datePickerLayer.layer.shadowRadius = 4.0
                 
         noteTextAmountView.delegate = self as? UITextFieldDelegate
-        typePicker.delegate = self
         
         let changingReallySimpleNote = self.changingReallySimpleNote
         noteTextAmountView.text = changingReallySimpleNote?.amount.currencyFormatting()
-        noteTextTypeView.text = changingReallySimpleNote?.noteType
         noteTitleTextField.text = changingReallySimpleNote?.noteTitle
 
         // For back button in navigation bar, change text
@@ -97,13 +159,11 @@ extension CreateChange {
 
         let titlePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 34))
         let amountPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 34))
-        let typePaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 34))
         
         reOccurringToggle.layer.cornerRadius = 10
         
         noteTitleTextField.leftView = titlePaddingView
         noteTextAmountView.leftView = amountPaddingView
-        noteTextTypeView.leftView = typePaddingView
         
         noteTitleTextField.layer.cornerRadius = 10
         noteTitleTextField.layer.opacity = 0.8
@@ -111,15 +171,11 @@ extension CreateChange {
         noteTextAmountView.layer.cornerRadius = 10
         noteTextAmountView.layer.opacity = 0.8
         
-        noteTextTypeView.layer.cornerRadius = 10
-        noteTextTypeView.layer.opacity = 0.8
-        
         notesLayer.layer.cornerRadius = 10
         notesLayer.layer.opacity = 0.8
         
         noteTitleTextField.leftViewMode = UITextField.ViewMode.always
         noteTextAmountView.leftViewMode = UITextField.ViewMode.always
-        noteTextTypeView.leftViewMode = UITextField.ViewMode.always
         
     }
     
